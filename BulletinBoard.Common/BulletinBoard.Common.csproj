@@ -42,8 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Picture.cs" />
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Entity\ProductCategory.cs" />
+    <Compile Include="Models\AuthorisationModels\UserModel.cs" />
+    <Compile Include="Patterns\IRepository.cs" />
+    <Compile Include="Patterns\IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

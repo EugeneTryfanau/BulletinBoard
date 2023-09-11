@@ -2,15 +2,12 @@
 
 namespace BulletinBoard.Common.Entity
 {
-    public class ProductCategory
+    public class Picture
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string CategoryName { get; set; }
-
-        [Required]
-        public ProductCategory ParentId { get; set; }
+        public string PicturePath { get; set; }
     }
 }
