@@ -1,16 +1,5 @@
-using Microsoft.AspNetCore;
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
 
-namespace BulletinBoard.DAL
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateWebHostBuilder(args).Build().Run();
-        }
-
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    }
-}
+app.MapGet("/", () => "Hello World!");
+app.Run();
