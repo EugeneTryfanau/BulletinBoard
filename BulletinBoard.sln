@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulletinBoard", "BulletinBoard\BulletinBoard.csproj", "{CBE9F2FF-03A1-4F0A-9486-1C6E3D3BF7EF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletinBoard.DAL", "BulletinBoard.DAL\BulletinBoard.DAL.csproj", "{B7294BA9-D485-4445-A2F2-2550BDD8EACA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BulletinBoard.DAL", "BulletinBoard\BulletinBoard.DAL.csproj", "{CBE9F2FF-03A1-4F0A-9486-1C6E3D3BF7EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BulletinBoard.DI", "BulletinBoard.DI\BulletinBoard.DI.csproj", "{65864283-105D-4BFA-A996-D946B6CCFCAE}"
 EndProject
@@ -23,10 +21,6 @@ Global
 		{CBE9F2FF-03A1-4F0A-9486-1C6E3D3BF7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBE9F2FF-03A1-4F0A-9486-1C6E3D3BF7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBE9F2FF-03A1-4F0A-9486-1C6E3D3BF7EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7294BA9-D485-4445-A2F2-2550BDD8EACA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7294BA9-D485-4445-A2F2-2550BDD8EACA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7294BA9-D485-4445-A2F2-2550BDD8EACA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7294BA9-D485-4445-A2F2-2550BDD8EACA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{65864283-105D-4BFA-A996-D946B6CCFCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{65864283-105D-4BFA-A996-D946B6CCFCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65864283-105D-4BFA-A996-D946B6CCFCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
