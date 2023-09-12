@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BulletinBoard.Common.Patterns
 {
-    internal interface IRepository<T>
+    public interface IRepository<T>
     {
         Task<IEnumerable<T>> GetAllAsync();
 
-        Task<T> GetItemByIdAsync(int id);
+        Task<T> GetItemByIdAsync(Guid id);
 
         Task<T> CreateAsync(T item);
 
         Task UpdateAsync(T item);
 
-        Task<T> DeleteAsync(int id);
+        Task<T> DeleteAsync(Guid id);
     }
 }

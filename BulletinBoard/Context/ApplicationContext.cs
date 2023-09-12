@@ -2,7 +2,7 @@
 using BulletinBoard.Common.Models.AuthorisationModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulletinBoard.Context
+namespace BulletinBoard.DAL.Context
 {
     public class ApplicationContext: DbContext
     {

@@ -16,9 +16,4 @@
     <ProjectReference Include="..\BulletinBoard.Common\BulletinBoard.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataAccess\Interfaces\" />
-    <Folder Include="Repositories\Interfaces\" />
-  </ItemGroup>
-
 </Project>

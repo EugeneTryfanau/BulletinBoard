@@ -8,7 +8,7 @@ namespace BulletinBoard.Common.Entity
     public class Product
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public string Name { get; set; }
