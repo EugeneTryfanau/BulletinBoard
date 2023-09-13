@@ -3,12 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BulletinBoard.Common.Entity
 {
-    public class Picture
+    public class ProductCategory
     {
         [Key]
         public Guid Id { get; set; }
 
         [Required]
-        public string PicturePath { get; set; }
+        public string? CategoryName { get; set; }
+
+        [Required]
+        public ProductCategory? ParentId { get; set; }
     }
 }

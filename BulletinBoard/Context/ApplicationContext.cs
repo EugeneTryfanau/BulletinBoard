@@ -1,5 +1,4 @@
-﻿using BulletinBoard.Common.Entity;
-using BulletinBoard.Common.Models.AuthorisationModels;
+﻿using BulletinBoard.DAL.Common.Models.AuthorisationModels;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;

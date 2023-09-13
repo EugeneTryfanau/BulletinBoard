@@ -1,4 +1,4 @@
-using BulletinBoard.Common.Models.AuthorisationModels;
+using BulletinBoard.DAL.Common.Models.AuthorisationModels;
 using BulletinBoard.DAL.Context;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;

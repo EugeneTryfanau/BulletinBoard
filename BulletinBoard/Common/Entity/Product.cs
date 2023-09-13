@@ -1,6 +1,5 @@
-﻿using BulletinBoard.Common.Models.AuthorisationModels;
+﻿using BulletinBoard.DAL.Common.Models.AuthorisationModels;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace BulletinBoard.Common.Entity
@@ -11,12 +10,12 @@ namespace BulletinBoard.Common.Entity
         public Guid Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
-        public ProductCategory Category { get; set; }
+        public ProductCategory? Category { get; set; }
 
         [Required]
         public double Price { get; set; }
@@ -25,7 +24,7 @@ namespace BulletinBoard.Common.Entity
         public bool ConditionIsNew { get; set; }
 
         [Required]
-        public UserModel UserID { get; set; }
+        public UserModel? UserID { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }
