@@ -1,27 +1,18 @@
 ﻿using BulletinBoard.Common.Entity;
 using BulletinBoard.Common.Models.AuthorisationModels;
+using Duende.IdentityServer.EntityFramework.Options;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace BulletinBoard.DAL.Context
 {
-    public class ApplicationContext: DbContext
+    public class ApplicationContext: ApiAuthorizationDbContext<UserModel>
     {
-        //напоминание: стандартная строка для объявления сущностей в бд для entity
-        //public DbSet<class> Name => Set<class>();
-
-        public DbSet<ProductCategory> ProductCategories { get; set; }
-
-        public DbSet<UserModel> UserModels { get; set; }
-
-        public DbSet<Product> Products { get; set; }
-
-        public DbSet<Picture> Picture { get; set; }
-
-        public ApplicationContext() => Database.EnsureCreated();
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ApplicationContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
+            : base(options, operationalStoreOptions)
         {
-            optionsBuilder.UseSqlite("Data Source=BulletinBoardDB.db");
+
         }
     }
 }

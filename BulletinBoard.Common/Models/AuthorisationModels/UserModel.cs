@@ -1,28 +1,14 @@
 ﻿using BulletinBoard.Common.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace BulletinBoard.Common.Models.AuthorisationModels
 {
-    public class UserModel
+    public class UserModel: IdentityUser
     {
-        [Key]
-        public Guid Id { get; set; }
-
-        [Required]
-        public string Name { get; set; }
-
-        [Required]
-        public string Email { get; set; }
-
-        [Required]
-        public string Password { get; set; }
-
         [Required]
         public string City { get; set; }
-
-        [Required]
-        public string Phone { get; set; }
 
         public string Sex { get; set; }
 
