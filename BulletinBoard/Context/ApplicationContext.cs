@@ -1,12 +1,8 @@
-﻿using BulletinBoard.DAL.Common.Models.AuthorisationModels;
-using Duende.IdentityServer.EntityFramework.Options;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace BulletinBoard.DAL.Context
 {
-    public class ApplicationContext: DbContext
+    public class ApplicationContext : DbContext
     {
         public ApplicationContext()
         {
