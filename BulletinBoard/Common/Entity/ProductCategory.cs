@@ -10,8 +10,5 @@ namespace BulletinBoard.Common.Entity
 
         [Required]
         public string? CategoryName { get; set; }
-
-        [Required]
-        public ProductCategory? ParentId { get; set; }
     }
 }
