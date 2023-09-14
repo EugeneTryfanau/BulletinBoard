@@ -6,12 +6,11 @@ using Microsoft.Extensions.Options;
 
 namespace BulletinBoard.DAL.Context
 {
-    public class ApplicationContext: ApiAuthorizationDbContext<UserModel>
+    public class ApplicationContext: DbContext
     {
-        public ApplicationContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
-            : base(options, operationalStoreOptions)
+        public ApplicationContext()
         {
-
+            Database.EnsureCreated();
         }
     }
 }
