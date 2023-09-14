@@ -14,6 +14,6 @@ namespace BulletinBoard.Common.Patterns
 
         Task UpdateAsync(T item);
 
-        Task<T> DeleteAsync(Guid id);
+        Task<int> DeleteAsync(Guid id);
     }
 }

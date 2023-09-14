@@ -14,6 +14,11 @@ namespace BulletinBoard.DAL.Context
 
         public DbSet<Picture> Pictures { get; set; } = null!;
 
+        public ApplicationContext()
+        {
+            Database.EnsureCreated();
+        }
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
         : base(options)
         {
