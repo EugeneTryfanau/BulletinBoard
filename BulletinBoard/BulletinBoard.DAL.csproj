@@ -20,8 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BulletinBoard.Common\BulletinBoard.Common.csproj" />
-  </ItemGroup>
-
 </Project>

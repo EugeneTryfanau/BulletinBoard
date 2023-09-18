@@ -1,4 +1,5 @@
 using BulletinBoard.DAL.Context;
+using BulletinBoard.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,11 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 
 var app = builder.Build();
 
-app.MapGet("/", (ApplicationContext db) => db.Users.ToList());
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+UserModelRepository users = new UserModelRepository();
+
+app.MapGet("/", async () => await users.GetAllAsync());
 
 app.Run();

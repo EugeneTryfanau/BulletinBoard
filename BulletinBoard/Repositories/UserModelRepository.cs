@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BulletinBoard.DAL.Repositories
 {
-    public class UserModelRepository : IUserModelRepository
+    public class UserModelRepository: IUserModelRepository
     {
         public async Task<UserModel> CreateAsync(UserModel item)
         {
@@ -13,7 +13,7 @@ namespace BulletinBoard.DAL.Repositories
             {
                 UserModel userModel = item;
 
-                db.Users.Add(userModel);
+                await db.Users.AddAsync(userModel);
 
                 await db.SaveChangesAsync();
 
@@ -47,9 +47,9 @@ namespace BulletinBoard.DAL.Repositories
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var users = (await GetAllAsync()).Where(x => x.Id == id.ToString());
+                UserModel? user = await db.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
 
-                return users.First();
+                return user;
             }
         }
 
@@ -57,7 +57,7 @@ namespace BulletinBoard.DAL.Repositories
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var userToChange = await GetItemByIdAsync(new Guid(item.Id));
+                var userToChange = await db.Users.FirstOrDefaultAsync(u => u.Id == item.Id.ToString());
 
                 if (userToChange != null)
                 {
