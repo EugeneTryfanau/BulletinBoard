@@ -1,5 +1,4 @@
 ﻿using BulletinBoard.Common.Models.AuthorisationModels;
-using BulletinBoard.DAL.Repositories.Context;
 using BulletinBoard.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +8,7 @@ namespace BulletinBoard.DAL.Repositories
     {
         public async Task<UserModel> CreateAsync(UserModel item)
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationDbContext db = new ApplicationContext())
             {
                 UserModel userModel = item;
 
@@ -23,7 +22,7 @@ namespace BulletinBoard.DAL.Repositories
 
         public async Task<int> DeleteAsync(Guid id)
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationDbContext db = new ApplicationContext())
             {
                 var delCount = await db.Database.ExecuteSqlRawAsync("delete from Users where Id={0}", id.ToString());
 
@@ -35,7 +34,7 @@ namespace BulletinBoard.DAL.Repositories
 
         public async Task<IEnumerable<UserModel>> GetAllAsync()
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationDbContext db = new ApplicationContext())
             {
                 var users = await db.Users.ToListAsync();
 
@@ -45,7 +44,7 @@ namespace BulletinBoard.DAL.Repositories
 
         public async Task<UserModel> GetItemByIdAsync(Guid id)
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationDbContext db = new ApplicationContext())
             {
                 UserModel? user = await db.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
 
@@ -55,7 +54,7 @@ namespace BulletinBoard.DAL.Repositories
 
         public async Task UpdateAsync(UserModel item)
         {
-            using (ApplicationContext db = new ApplicationContext())
+            using (ApplicationDbContext db = new ApplicationContext())
             {
                 var userToChange = await db.Users.FirstOrDefaultAsync(u => u.Id == item.Id.ToString());
 
