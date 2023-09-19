@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BulletinBoard.Common\BulletinBoard.Common.csproj" />
+    <ProjectReference Include="..\BulletinBoard\BulletinBoard.csproj" />
   </ItemGroup>
 
 </Project>

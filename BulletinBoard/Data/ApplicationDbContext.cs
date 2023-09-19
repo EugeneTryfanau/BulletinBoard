@@ -1,10 +1,12 @@
 ﻿using BulletinBoard.Common.Entity;
-using BulletinBoard.Common.Models.AuthorisationModels;
+using Duende.IdentityServer.EntityFramework.Options;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace BulletinBoard.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         public DbSet<ProductCategory> Categories { get; set; } = null!;
 
@@ -12,8 +14,8 @@ namespace BulletinBoard.Data
 
         public DbSet<Picture> Pictures { get; set; } = null!;
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
+        public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
+            : base(options, operationalStoreOptions)
         {
             Database.EnsureCreated();
         }
@@ -21,6 +23,9 @@ namespace BulletinBoard.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser { Id = Guid.NewGuid().ToString(), UserName = "Administrator", City = "NaN", PasswordHash = "Flzhk9483ELod".GetHashCode().ToString(),
+                    EmailConfirmed = true });
         }
     }
 }

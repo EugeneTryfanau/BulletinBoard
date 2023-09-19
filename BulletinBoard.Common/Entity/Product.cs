@@ -1,5 +1,4 @@
-﻿using BulletinBoard.Common.Models.AuthorisationModels;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace BulletinBoard.Common.Entity
 {
@@ -23,11 +22,14 @@ namespace BulletinBoard.Common.Entity
         public bool ConditionIsNew { get; set; }
 
         [Required]
-        public ApplicationUser? UserID { get; set; }
+        public string? ApplicationUserId { get; set; }
+
+        [Required]
+        public ApplicationUser User { get; set; } = null!;
 
         [Required]
         public DateTime CreationDate { get; set; }
 
-        public List<Picture> ProductPicturies { get; set; } = new List<Picture>();
+        public List<Picture> ProductPicturies { get; set; } = new();
     }
 }

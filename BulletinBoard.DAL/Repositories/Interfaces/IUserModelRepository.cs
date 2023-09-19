@@ -1,4 +1,4 @@
-﻿using BulletinBoard.Common.Models.AuthorisationModels;
+﻿using BulletinBoard.Common.Entity;
 using BulletinBoard.Common.Patterns;
 
 namespace BulletinBoard.DAL.Repositories.Interfaces
