@@ -1,11 +1,14 @@
 ﻿using BulletinBoard.Common.Entity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace BulletinBoard.Common.Models.AuthorisationModels
 {
-    public class UserModel : IdentityUser
+    [Keyless]
+    public class ApplicationUser : IdentityUser
     {
+
         [Required]
         public string? City { get; set; }
 

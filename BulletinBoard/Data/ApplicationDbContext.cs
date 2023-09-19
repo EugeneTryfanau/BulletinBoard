@@ -6,8 +6,6 @@ namespace BulletinBoard.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<UserModel> Users { get; set; } = null!;
-
         public DbSet<ProductCategory> Categories { get; set; } = null!;
 
         public DbSet<Product> Products { get; set; } = null!;
@@ -22,9 +20,7 @@ namespace BulletinBoard.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserModel>().HasData(
-                new UserModel { Id = Guid.NewGuid().ToString(), UserName = "Administrator", City = "NaN", PasswordHash = "Flzhk9483ELod".GetHashCode().ToString() }
-        );
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

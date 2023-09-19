@@ -23,7 +23,7 @@ namespace BulletinBoard.Common.Entity
         public bool ConditionIsNew { get; set; }
 
         [Required]
-        public UserModel? UserID { get; set; }
+        public ApplicationUser? UserID { get; set; }
 
         [Required]
         public DateTime CreationDate { get; set; }

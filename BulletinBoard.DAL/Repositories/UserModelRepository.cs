@@ -6,11 +6,11 @@ namespace BulletinBoard.DAL.Repositories
 {
     public class UserModelRepository : IUserModelRepository
     {
-        public async Task<UserModel> CreateAsync(UserModel item)
+        public async Task<ApplicationUser> CreateAsync(ApplicationUser item)
         {
             using (ApplicationDbContext db = new ApplicationContext())
             {
-                UserModel userModel = item;
+                ApplicationUser userModel = item;
 
                 await db.Users.AddAsync(userModel);
 
@@ -32,7 +32,7 @@ namespace BulletinBoard.DAL.Repositories
             }
         }
 
-        public async Task<IEnumerable<UserModel>> GetAllAsync()
+        public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
         {
             using (ApplicationDbContext db = new ApplicationContext())
             {
@@ -42,17 +42,17 @@ namespace BulletinBoard.DAL.Repositories
             }
         }
 
-        public async Task<UserModel> GetItemByIdAsync(Guid id)
+        public async Task<ApplicationUser> GetItemByIdAsync(Guid id)
         {
             using (ApplicationDbContext db = new ApplicationContext())
             {
-                UserModel? user = await db.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
+                ApplicationUser? user = await db.Users.FirstOrDefaultAsync(u => u.Id == id.ToString());
 
                 return user;
             }
         }
 
-        public async Task UpdateAsync(UserModel item)
+        public async Task UpdateAsync(ApplicationUser item)
         {
             using (ApplicationDbContext db = new ApplicationContext())
             {
