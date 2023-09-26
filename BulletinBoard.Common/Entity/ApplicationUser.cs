@@ -9,7 +9,6 @@ namespace BulletinBoard.Common.Entity
         [Key]
         public override string Id { get => base.Id; set => base.Id = value; }
 
-        [Required]
         public string? City { get; set; }
 
         public string? Gender { get; set; }
