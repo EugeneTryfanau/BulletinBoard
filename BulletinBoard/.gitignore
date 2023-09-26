@@ -232,15 +232,15 @@ _Pvt_Extensions
 .fake/
 
 # Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+/ClientApp/dist
+/ClientApp/tmp
+/ClientApp/out-tsc
+/ClientApp/bazel-out
 
 # Node
-/node_modules
-npm-debug.log
-yarn-error.log
+/ClientApp/node_modules
+/ClientApp/npm-debug.log
+/ClientApp/yarn-error.log
 
 # IDEs and editors
 .idea/
@@ -260,13 +260,13 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
+/ClientApp/.angular/cache
+/ClientApp.sass-cache/
+/ClientApp/connect.lock
+/ClientApp/coverage
+/ClientApp/libpeerconnection.log
+/ClientApp/testem.log
+/ClientApp/typings
 
 # System files
 .DS_Store
