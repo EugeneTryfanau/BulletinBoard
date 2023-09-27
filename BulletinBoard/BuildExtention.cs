@@ -8,6 +8,9 @@
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(_ => { });
 
             app.Use((ctx, next) =>

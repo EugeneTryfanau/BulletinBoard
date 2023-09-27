@@ -1,16 +1,38 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  loadUser() { }
+  user: any = null;
 
-  login() { }
+  async loadUser() {
+    const user = await firstValueFrom(
+      this.http.get<any>("/api/user")
+    )
+    if ('userId' in user) {
+      this.user = user
+    }
+    return user;
+  }
+
+  login(loginForm: any) {
+    return this.http.post<any>("/api/login", loginForm, { withCredentials: true })
+      .subscribe(_ => {
+        this.loadUser()
+      });
+  }
 
   register() { }
+
+  logout() {
+    return this.http.get("/api/logout")
+      .subscribe(_ => this.user = null);
+  }
 }

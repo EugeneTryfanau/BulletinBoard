@@ -6,6 +6,7 @@ using System.Security.Claims;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication("cookie").AddCookie("cookie");
+builder.Services.AddAuthorization();
 
 var app = builder.BuildWithSPA();
 
@@ -13,9 +14,9 @@ var apiEndpoints = app.MapGroup("/api");
 
 
 apiEndpoints.MapGet("/user", UserEndpoint.Handler);
-apiEndpoints.MapGet("/login", LoginEndpoint.Handler);
+apiEndpoints.MapPost("/login", LoginEndpoint.Handler);
 //TODO ned to do registrationEndpoint
-apiEndpoints.MapGet("/register", () => "Hello World");
-apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler);
+apiEndpoints.MapPost("/register", () => "Hello World");
+apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
 
 app.Run();
