@@ -1,22 +1,20 @@
 ﻿using BulletinBoard.Common.Entity;
-using Microsoft.AspNetCore.Authentication;
-using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace BulletinBoard.Endpoints
 {
     public class LoginEndpoint
     {
-        public static IResult Handler(LoginForm form) =>
-            Results.SignIn(
-                new ClaimsPrincipal(
-                    new ClaimsIdentity(
-                        new Claim[]
-                        {
-                            new Claim("userId", Guid.NewGuid().ToString()), new Claim("username", form.Username)
-                        },
-                        "cookie")
-                ),
-                properties: new AuthenticationProperties() { IsPersistent = true },
-                authenticationScheme: "cookie");
+        public static async Task<IResult> Handler(LoginForm form, SignInManager<ApplicationUser> signInManager)
+        {
+            var result = await signInManager.PasswordSignInAsync(form.Username, form.Password, true, false);
+
+            if (result.Succeeded)
+            {
+                return Results.Ok();
+            }
+
+            return Results.BadRequest();
+        }
     }
 }

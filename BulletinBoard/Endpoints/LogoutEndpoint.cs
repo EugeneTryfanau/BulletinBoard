@@ -1,7 +1,14 @@
-﻿namespace BulletinBoard.Endpoints
+﻿using BulletinBoard.Common.Entity;
+using Microsoft.AspNetCore.Identity;
+
+namespace BulletinBoard.Endpoints
 {
     public class LogoutEndpoint
     {
-        public static IResult Handler() => Results.SignOut(authenticationSchemes: new List<string>() { "cookie" });
+        public static async Task<IResult> Handler(SignInManager<ApplicationUser> signInManager)
+        {
+            await signInManager.SignOutAsync();
+            return Results.Ok();
+        }
     }
 }
