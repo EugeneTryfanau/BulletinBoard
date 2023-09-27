@@ -1,1 +1,7 @@
-<p>register works!</p>
+<h1>Register Form</h1>
+<div>
+  <input [(ngModel)]="username" />
+  <input [(ngModel)]="password" type="password" />
+  <input [(ngModel)]="confirmPassword" type="password" />
+  <button (click)="register()">Register</button>
+</div>

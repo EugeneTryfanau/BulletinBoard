@@ -29,7 +29,12 @@ export class AuthService {
       });
   }
 
-  register() { }
+  register(registerForm: any) {
+    return this.http.post<any>("/api/register", registerForm, { withCredentials: true })
+      .subscribe(_ => {
+        this.loadUser()
+      })
+  }
 
   logout() {
     return this.http.get("/api/logout")
