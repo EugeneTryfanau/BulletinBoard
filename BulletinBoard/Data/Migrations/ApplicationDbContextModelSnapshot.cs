@@ -99,23 +99,6 @@ namespace BulletinBoard.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "162a8ce5-ddf2-4956-810c-5732841d7b13",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            City = "NaN",
-                            ConcurrencyStamp = "7d6b564f-51be-4e6a-a4c1-9321719a6a96",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "425627138",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "52b0b254-6686-4362-a3ce-f39641750098",
-                            TwoFactorEnabled = false,
-                            UserName = "Administrator"
-                        });
                 });
 
             modelBuilder.Entity("BulletinBoard.Common.Entity.Picture", b =>
@@ -412,12 +395,10 @@ namespace BulletinBoard.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -454,12 +435,10 @@ namespace BulletinBoard.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");

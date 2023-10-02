@@ -17,12 +17,20 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
             options.Password.RequiredUniqueChars = 0;
             options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireDigit = false;
+            options.Password.RequireUppercase = false;
         }
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("manager", pb => pb
+        .RequireClaim("level", "manager", "admin"));
+    options.AddPolicy("admin", pb => pb
+        .RequireClaim("level", "admin"));
+});
 
 var app = builder.BuildWithSPA();
 

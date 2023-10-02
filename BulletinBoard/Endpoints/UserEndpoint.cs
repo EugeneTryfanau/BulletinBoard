@@ -1,5 +1,6 @@
 ﻿using BulletinBoard.Common.Entity;
 using BulletinBoard.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -12,8 +13,9 @@ namespace BulletinBoard.Endpoints
 
         public static async Task<List<ApplicationUser>> GetUsers(ClaimsPrincipal user, ApplicationDbContext db)
         {
-            var users = await db.Users.ToListAsync();
-            return users;
+            var userId = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            return await db.Users
+                .ToListAsync();
         }
     }
 }

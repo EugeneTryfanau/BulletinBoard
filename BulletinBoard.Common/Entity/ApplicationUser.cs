@@ -6,9 +6,6 @@ namespace BulletinBoard.Common.Entity
 {
     public class ApplicationUser : IdentityUser
     {
-        [Key]
-        public override string Id { get => base.Id; set => base.Id = value; }
-
         public string? City { get; set; }
 
         public string? Gender { get; set; }
