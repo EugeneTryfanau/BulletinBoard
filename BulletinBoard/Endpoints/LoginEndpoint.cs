@@ -1,10 +1,5 @@
 ﻿using BulletinBoard.Common.Entity;
-using BulletinBoard.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Security.Claims;
 
 namespace BulletinBoard.Endpoints
 {
@@ -13,7 +8,6 @@ namespace BulletinBoard.Endpoints
         public static async Task<IResult> Handler(LoginForm form, SignInManager<ApplicationUser> signInManager)
         {
             var result = await signInManager.PasswordSignInAsync(form.Username, form.Password, true, false);
-
 
             if (result.Succeeded)
             {

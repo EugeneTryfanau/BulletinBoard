@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulletinBoard.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230928131538_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20231002131718_InitCreation")]
+    partial class InitCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,6 +79,9 @@ namespace BulletinBoard.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -100,6 +103,8 @@ namespace BulletinBoard.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -343,6 +348,20 @@ namespace BulletinBoard.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "9ef094ef-4acc-4f69-b21a-f8e4d9970e12",
+                            Name = "admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "3e890baa-06c3-4575-8fd9-152b90d5f80b",
+                            Name = "user",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -457,7 +476,13 @@ namespace BulletinBoard.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AvatarPictureIDId");
 
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId");
+
                     b.Navigation("AvatarPictureID");
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("BulletinBoard.Common.Entity.Picture", b =>

@@ -14,6 +14,7 @@ namespace BulletinBoard.Endpoints
 
             var user = new ApplicationUser() { UserName = form.Username };
             var userCreateResult = await userManager.CreateAsync(user, form.Password);
+            await userManager.AddToRoleAsync(user, "user");
 
             if (!userCreateResult.Succeeded)
             {

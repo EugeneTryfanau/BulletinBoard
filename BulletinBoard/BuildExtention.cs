@@ -1,6 +1,5 @@
 ﻿using BulletinBoard.Common.Entity;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace BulletinBoard
@@ -39,8 +38,9 @@ namespace BulletinBoard
             if (!userManager.Users.Any(x => x.UserName == "admin"))
             {
                 admin = new ApplicationUser { UserName = "admin" };
+
                 userManager.CreateAsync(admin, "password").GetAwaiter().GetResult();
-                userManager.AddClaimAsync(admin, new Claim("level", "amdin")).GetAwaiter().GetResult();
+                userManager.AddToRoleAsync(admin, "admin").GetAwaiter().GetResult();
             }
 
             return app;

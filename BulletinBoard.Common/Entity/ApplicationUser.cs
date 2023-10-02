@@ -15,5 +15,7 @@ namespace BulletinBoard.Common.Entity
         public Picture? AvatarPictureID { get; set; }
 
         public List<Product> Products { get; set; } = new();
+
+        public IdentityRole? Role { get; set; }
     }
 }

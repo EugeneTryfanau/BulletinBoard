@@ -2,6 +2,7 @@ using BulletinBoard;
 using BulletinBoard.Common.Entity;
 using BulletinBoard.Data;
 using BulletinBoard.Endpoints;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,12 +25,16 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+{
+    options.LoginPath = "/login";
+    options.AccessDeniedPath = "/login";
+});
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("manager", pb => pb
-        .RequireClaim("level", "manager", "admin"));
-    options.AddPolicy("admin", pb => pb
-        .RequireClaim("level", "admin"));
+    options.AddPolicy("admin", policy => { policy.RequireRole("admin"); });
+    options.AddPolicy("user", policy => { policy.RequireRole("user", "admin"); });
 });
 
 var app = builder.BuildWithSPA();
