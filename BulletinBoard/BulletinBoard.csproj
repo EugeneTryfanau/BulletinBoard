@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BulletinBoard.Common\BulletinBoard.Common.csproj" />
+    <ProjectReference Include="..\BulletinBoard.DAL\BulletinBoard.DAL.csproj" />
   </ItemGroup>
 
 </Project>

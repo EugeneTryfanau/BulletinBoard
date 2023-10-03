@@ -1,6 +1,5 @@
-﻿using BulletinBoard.Common.Entity;
-using BulletinBoard.Data;
-using Microsoft.AspNetCore.Authorization;
+﻿using BulletinBoard.DAL.Data;
+using BulletinBoard.DAL.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 

@@ -7,19 +7,8 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ClientApp';
-  username: any;
-
+  title: any = "ClientApp"
   constructor(private auth: AuthService) {
     
-  }
-
-  async ngOnInit() {
-    const user = await this.auth.loadUser();
-    this.username = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-  }
-
-  logout() {
-    return this.auth.logout();
   }
 }

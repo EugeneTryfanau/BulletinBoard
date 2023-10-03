@@ -1,14 +1,13 @@
 <div class="topnav" id="tryfTopNav">
   <div class="mainNavPart">
-    <a routerLink=""><img src="/assets/icon24.png" width="24" height="24" /></a>
-    <a routerLink="">Главная</a>
-    <a routerLink="/users">Пользователи</a>
+    <a href=""><img src="/assets/icon24.png" width="24" height="24" /></a>
+    <a href="">Главная</a>
+    <a routerLink="/users" *ngIf="isAdmin">Пользователи</a>
   </div>
   <div class="signPart">
-    <a routerLink="/register">Регистрация</a>
-    <a routerLink="/login">Вход</a>
+    <a href="/" class="logout" *ngIf="visibility" (click)="logout()">Выход</a>
+    <a routerLink="/" class="userProfile" *ngIf="visibility">{{username}}</a>
+    <a routerLink="/register" *ngIf="!visibility">Регистрация</a>
+    <a routerLink="/login" *ngIf="!visibility">Вход</a>
   </div>
-  <!--<a class="icon" (click)="showHidden()">
-    <i class="fa fa-bars"></i>
-  </a>-->
 </div>

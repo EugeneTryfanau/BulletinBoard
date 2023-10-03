@@ -1,11 +1,11 @@
-﻿using BulletinBoard.Common.Entity;
+﻿using BulletinBoard.DAL.Entity;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace BulletinBoard.Data
+namespace BulletinBoard.DAL.Data
 {
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {

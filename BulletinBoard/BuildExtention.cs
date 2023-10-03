@@ -1,6 +1,5 @@
-﻿using BulletinBoard.Common.Entity;
+﻿using BulletinBoard.DAL.Entity;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
 
 namespace BulletinBoard
 {

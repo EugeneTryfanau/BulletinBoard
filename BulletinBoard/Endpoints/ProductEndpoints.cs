@@ -1,9 +1,4 @@
-﻿using BulletinBoard.Common.Entity;
-using BulletinBoard.Data;
-using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-
-namespace BulletinBoard.Endpoints
+﻿namespace BulletinBoard.Endpoints
 {
     public class ProductEndpoints
     {

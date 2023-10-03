@@ -1,4 +1,4 @@
-﻿using BulletinBoard.Common.Entity;
+﻿using BulletinBoard.DAL.Entity;
 using Microsoft.AspNetCore.Identity;
 
 namespace BulletinBoard.Endpoints

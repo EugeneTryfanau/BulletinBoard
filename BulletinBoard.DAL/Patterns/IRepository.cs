@@ -1,6 +1,6 @@
-﻿namespace BulletinBoard.Common.Patterns
+﻿namespace BulletinBoard.DAL.Patterns
 {
-    public interface IService<T>
+    public interface IRepository<T>
     {
         Task<IEnumerable<T>> GetAllAsync();
 

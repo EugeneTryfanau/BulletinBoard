@@ -25,20 +25,24 @@ export class AuthService {
   login(loginForm: any) {
     return this.http.post<any>("/api/login", loginForm, { withCredentials: true })
       .subscribe(_ => {
-        this.loadUser()
-        this.http.get("/api/")
+        this.loadUser();
+        window.location.href = "/";
       });
   }
 
   register(registerForm: any) {
     return this.http.post<any>("/api/register", registerForm, { withCredentials: true })
       .subscribe(_ => {
-        this.loadUser()
+        this.loadUser();
+        window.location.href = "/";
       })
   }
 
   logout() {
     return this.http.get("/api/logout")
-      .subscribe(_ => this.user = null);
+      .subscribe(_ => {
+        this.user = null;
+        window.location.href = "/";
+      });
   }
 }

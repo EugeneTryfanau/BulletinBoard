@@ -1,4 +1,4 @@
-﻿using BulletinBoard.Common.Entity;
+﻿using BulletinBoard.DAL.Entity;
 using Microsoft.AspNetCore.Identity;
 
 namespace BulletinBoard.Endpoints
@@ -7,7 +7,7 @@ namespace BulletinBoard.Endpoints
     {
         public static async Task<IResult> Handler(RegisterForm form, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
-            if(form.Password != form.ConfirmPassword)
+            if (form.Password != form.ConfirmPassword)
             {
                 return Results.BadRequest();
             }
@@ -22,7 +22,7 @@ namespace BulletinBoard.Endpoints
             }
 
             await signInManager.SignInAsync(user, true);
-            
+
             return Results.Ok();
         }
     }

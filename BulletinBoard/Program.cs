@@ -1,6 +1,6 @@
 using BulletinBoard;
-using BulletinBoard.Common.Entity;
-using BulletinBoard.Data;
+using BulletinBoard.DAL.Data;
+using BulletinBoard.DAL.Entity;
 using BulletinBoard.Endpoints;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
