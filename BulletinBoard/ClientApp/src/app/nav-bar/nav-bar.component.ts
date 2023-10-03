@@ -9,7 +9,8 @@ import { AuthService } from '../auth.service';
 export class NavBarComponent {
   visibility: boolean = false;
   isAdmin: boolean = false; 
-  username: any;
+  userName: any;
+  userRole: any;
 
   constructor(private auth: AuthService) {
 
@@ -17,18 +18,18 @@ export class NavBarComponent {
 
   async ngOnInit() {
     const user = await this.auth.loadUser();
-    this.username = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    this.userName = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    this.userRole = user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
 
-    if (this.username != null) {
+    if (this.userName != null) {
       this.visibility = true;
-    } else {
-      this.visibility = false;
-    }
 
-    if (this.username == "admin") {
-      this.isAdmin = true;
+      if (this.userRole == "admin") {
+        this.isAdmin = true;
+      }
     } else {
       this.isAdmin = false;
+      this.visibility = false;
     }
   }
 
