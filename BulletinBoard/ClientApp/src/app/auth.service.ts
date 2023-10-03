@@ -26,6 +26,7 @@ export class AuthService {
     return this.http.post<any>("/api/login", loginForm, { withCredentials: true })
       .subscribe(_ => {
         this.loadUser()
+        this.http.get("/api/")
       });
   }
 

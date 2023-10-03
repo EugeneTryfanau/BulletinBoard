@@ -1,0 +1,36 @@
+.topnav {
+  overflow: hidden;
+  background-color: #f2f2f2;
+  border-radius: 15px;
+}
+
+  .topnav .mainNavPart a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 27px;
+    color: black;
+  }
+
+    .topnav .mainNavPart a:hover {
+      background-color: #d3f8ba;
+      color: black;
+    }
+
+
+  .topnav .signPart a {
+    float: right;
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 27px;
+    color: black;
+  }
+
+    .topnav .signPart a:hover {
+      background-color: #d3f8ba;
+      color: black;
+    }

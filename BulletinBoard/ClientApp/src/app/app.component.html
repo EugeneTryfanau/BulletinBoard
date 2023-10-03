@@ -1,4 +1,4 @@
-<nav>
+<!--<nav>
   <ul>
     <li><a routerLink="/users" routerLinkActive="active" ariaCurrentWhenActive="page">Users</a></li>
     <li><a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a></li>
@@ -9,6 +9,15 @@
 <div>
   {{username}}
 </div>
-<button (click)="logout()">Logout</button>
+<button (click)="logout()">Logout</button>-->
 
-<router-outlet></router-outlet>
+<div>
+  <div>
+    <app-nav-bar></app-nav-bar>
+  </div>
+  <br/>
+  <div class="conteiner">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
