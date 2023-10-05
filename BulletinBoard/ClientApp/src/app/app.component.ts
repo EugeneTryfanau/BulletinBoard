@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
+import { CategoryService } from './category.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,8 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
   title: any = "ClientApp"
-  constructor(private auth: AuthService) {
+
+  constructor(private auth: AuthService, private categoryService: CategoryService) {
     
   }
 }

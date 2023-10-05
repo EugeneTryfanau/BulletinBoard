@@ -1,0 +1,22 @@
+.header {
+  grid-area: header;
+}
+
+.menu {
+  grid-area: menu;
+  grid-column: 1 / span 4;
+}
+
+.main {
+  grid-area: main;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'header header header header header'
+    'menu main main main main ';
+}
+
+  .grid-container > div {
+  }
