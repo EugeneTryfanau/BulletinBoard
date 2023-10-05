@@ -15,10 +15,18 @@ export class UsersComponent {
 
   users: any = [];
 
+
   async ngOnInit() {
     this.users = await firstValueFrom(
       this.http.get('/api/users')
     )
+  }
+
+  promotion(userId: string) {
+    return this.http.post<any>("/api/users/" + userId, { withCredentials: true })
+      .subscribe(_ => {
+        this.users.filter((user: { id: string; }) => user.id != userId);
+      })
   }
 
 }

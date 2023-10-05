@@ -50,5 +50,6 @@ apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
 apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 
 apiEndpoints.MapGet("/users", UserEndpoints.GetUsers).RequireAuthorization("admin");
+apiEndpoints.MapPost("/users/{userId}", UserEndpoints.UserPromotion).RequireAuthorization("admin");
 
 app.Run();

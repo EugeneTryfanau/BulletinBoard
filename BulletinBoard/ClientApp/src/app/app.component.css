@@ -4,18 +4,21 @@
 
 .menu {
   grid-area: menu;
-  grid-column: 1 / span 4;
+  grid-column: span 1;
+  margin: 0 0 0 0;
+  padding: 0 40px 0 40px;
 }
 
 .main {
   grid-area: main;
+  margin: 18.72px 0 0 0;
 }
 
 .grid-container {
   display: grid;
   grid-template-areas:
-    'header header header header header'
-    'menu main main main main ';
+    'header header header header header header header header'
+    'menu main main main main main main main';
 }
 
   .grid-container > div {

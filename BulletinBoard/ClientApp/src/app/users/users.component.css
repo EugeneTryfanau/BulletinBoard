@@ -1,0 +1,16 @@
+.linkbutton {
+  margin-left: 10px;
+  border: 1px solid #333;
+  display: inline-block;
+  padding: 5px 15px;
+  background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+}
+
+  .linkbutton:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce);
+    color: #a00;
+  }
