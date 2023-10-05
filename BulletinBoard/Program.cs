@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString, x => x.MigrationsAssembly("BulletinBoard.DAL")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     {

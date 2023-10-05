@@ -22,7 +22,7 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.ApplicationUser", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -106,7 +106,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.Picture", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -126,7 +126,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.ToTable("Pictures");
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.Product", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,8 +136,8 @@ namespace BulletinBoard.DAL.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("ConditionIsNew")
                         .HasColumnType("bit");
@@ -164,11 +164,13 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.ProductCategory", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.ProductCategory", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -177,6 +179,83 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CategoryName = "Недвижимость"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryName = "Авто и транспорт"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryName = "Хобби, спорт и туризм"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryName = "Ремонт и стройка"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryName = "Для детей и мам"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryName = "Женский гардероб"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryName = "Мужской гардероб"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryName = "Животные"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryName = "Все для дома"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryName = "Сад и огород"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryName = "Электроника"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryName = "Телефоны и планшеты"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryName = "Компьютерная техника"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryName = "Бытовая техника"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CategoryName = "Красота и здоровье"
+                        });
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -349,13 +428,13 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9ef094ef-4acc-4f69-b21a-f8e4d9970e12",
+                            Id = "d11e6b63-ca5e-4682-858c-44e6a8ffd2b6",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3e890baa-06c3-4575-8fd9-152b90d5f80b",
+                            Id = "fec5e0f5-5c4c-4d8d-a03c-bd66fa3b9956",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -467,9 +546,9 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.ApplicationUser", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.ApplicationUser", b =>
                 {
-                    b.HasOne("BulletinBoard.Common.Entity.Picture", "AvatarPictureID")
+                    b.HasOne("BulletinBoard.DAL.Entity.Picture", "AvatarPictureID")
                         .WithMany()
                         .HasForeignKey("AvatarPictureIDId");
 
@@ -482,22 +561,22 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.Picture", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
                 {
-                    b.HasOne("BulletinBoard.Common.Entity.Product", null)
+                    b.HasOne("BulletinBoard.DAL.Entity.Product", null)
                         .WithMany("ProductPicturies")
                         .HasForeignKey("ProductId");
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.Product", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
                 {
-                    b.HasOne("BulletinBoard.Common.Entity.ApplicationUser", "User")
+                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", "User")
                         .WithMany("Products")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BulletinBoard.Common.Entity.ProductCategory", "Category")
+                    b.HasOne("BulletinBoard.DAL.Entity.ProductCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -519,7 +598,7 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("BulletinBoard.Common.Entity.ApplicationUser", null)
+                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -528,7 +607,7 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("BulletinBoard.Common.Entity.ApplicationUser", null)
+                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -543,7 +622,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BulletinBoard.Common.Entity.ApplicationUser", null)
+                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -552,19 +631,19 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("BulletinBoard.Common.Entity.ApplicationUser", null)
+                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.ApplicationUser", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.ApplicationUser", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BulletinBoard.Common.Entity.Product", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
                 {
                     b.Navigation("ProductPicturies");
                 });

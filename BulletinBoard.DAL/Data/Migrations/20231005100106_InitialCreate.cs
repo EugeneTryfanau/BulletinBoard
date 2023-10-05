@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BulletinBoard.DAL.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitCreation : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,7 +31,8 @@ namespace BulletinBoard.DAL.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -226,7 +227,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     ConditionIsNew = table.Column<bool>(type: "bit", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -272,8 +273,30 @@ namespace BulletinBoard.DAL.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "3e890baa-06c3-4575-8fd9-152b90d5f80b", null, "user", "USER" },
-                    { "9ef094ef-4acc-4f69-b21a-f8e4d9970e12", null, "admin", "ADMIN" }
+                    { "d11e6b63-ca5e-4682-858c-44e6a8ffd2b6", null, "admin", "ADMIN" },
+                    { "fec5e0f5-5c4c-4d8d-a03c-bd66fa3b9956", null, "user", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "Id", "CategoryName" },
+                values: new object[,]
+                {
+                    { 1, "Недвижимость" },
+                    { 2, "Авто и транспорт" },
+                    { 3, "Хобби, спорт и туризм" },
+                    { 4, "Ремонт и стройка" },
+                    { 5, "Для детей и мам" },
+                    { 6, "Женский гардероб" },
+                    { 7, "Мужской гардероб" },
+                    { 8, "Животные" },
+                    { 9, "Все для дома" },
+                    { 10, "Сад и огород" },
+                    { 11, "Электроника" },
+                    { 12, "Телефоны и планшеты" },
+                    { 13, "Компьютерная техника" },
+                    { 14, "Бытовая техника" },
+                    { 15, "Красота и здоровье" }
                 });
 
             migrationBuilder.CreateIndex(
