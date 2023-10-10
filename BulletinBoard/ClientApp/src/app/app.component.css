@@ -1,25 +1,14 @@
-.header {
-  grid-area: header;
+.headbar {
+  grid-area: headbar;
 }
 
-.menu {
-  grid-area: menu;
-  grid-column: span 1;
-  margin: 0 0 0 0;
-  padding: 18.72px 0 0 10px;
-}
-
-.main {
-  grid-area: main;
-  margin: 18.72px 10px 0 0;
+.mainContent {
+  grid-area: mainContent;
+  margin-top: 60px;
 }
 
 .grid-container {
   display: grid;
-  grid-template-areas:
-    'header header header header header header header header'
-    'menu main main main main main main main';
+  grid-template-areas: 'headbar headbar headbar headbar headbar'
+    'mainContent mainContent mainContent mainContent mainContent'
 }
-
-  .grid-container > div {
-  }

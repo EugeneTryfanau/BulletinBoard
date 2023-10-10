@@ -1,3 +1,11 @@
+.users-conteiner {
+  position: absolute;
+  margin: 0 0 0 20px;
+  max-width: 600px;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
 .linkbutton {
   margin-left: 10px;
   border: 1px solid #333;

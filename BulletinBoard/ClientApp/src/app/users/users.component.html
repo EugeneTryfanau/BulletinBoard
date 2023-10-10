@@ -1,3 +1,6 @@
-<div *ngFor="let user of users">
-  <a>Пользователь: {{user.userName}} </a><a routerLink="/users" class="linkbutton" (click)="promotion(user.id)">Сделать администратором</a>
+<div class="users-conteiner">
+  <div *ngFor="let user of users">
+    <a>Пользователь: {{user.userName}} </a><a routerLink="/users" class="linkbutton" (click)="promotion(user.id)">Сделать администратором</a>
+  </div>
 </div>
+

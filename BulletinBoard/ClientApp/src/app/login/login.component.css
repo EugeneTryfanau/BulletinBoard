@@ -3,8 +3,7 @@
 }
 
 .login-conteiner {
-  position:absolute;
-  margin: 0 0 0 20px;
+  margin: auto;
   max-width: 600px;
   padding: 16px;
   background-color: #f2f2f2;
