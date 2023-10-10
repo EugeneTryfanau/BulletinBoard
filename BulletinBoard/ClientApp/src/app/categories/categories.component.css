@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+.sidenav-conteiner {
+  padding: 16px;
+  background-color: #f2f2f2;
+}

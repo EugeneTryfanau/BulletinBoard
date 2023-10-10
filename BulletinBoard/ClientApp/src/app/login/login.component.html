@@ -1,6 +1,18 @@
-<h1>Login Form</h1>
 <div>
-  <input [(ngModel)]="username" />
-  <input [(ngModel)]="password" type="password" />
-  <button (click)="login()">Login</button>
+  <form class="login-conteiner">
+
+    <h2>Пользователь</h2>
+
+    <label for="username"><b>Имя пользователя</b></label>
+    <input [(ngModel)]="username" type="text" name="username" id="username" placeholder="Введите имя пользователя" required [ngModelOptions]="{standalone: true}" />
+
+    <label for="password"><b>Пароль</b></label>
+    <input [(ngModel)]="password" type="password" name="password" id="password" placeholder="Введите пароль" required [ngModelOptions]="{standalone: true}" />
+
+    <button type="submit" class="btn" (click)="login()">Отправить</button>
+
+    <div class="container signup">
+      <p>У вас ещё нет аккаунта? <a routerLink="/register">Регистрация</a>.</p>
+    </div>
+  </form>
 </div>

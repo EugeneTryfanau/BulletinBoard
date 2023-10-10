@@ -1,7 +1,22 @@
-<h1>Register Form</h1>
 <div>
-  <input [(ngModel)]="username" />
-  <input [(ngModel)]="password" type="password" />
-  <input [(ngModel)]="confirmPassword" type="password" />
-  <button (click)="register()">Register</button>
+  <form class="register-conteiner">
+    <div class="container">
+      <h2>Регистрация</h2>
+
+      <label for="email"><b>Имя пользователя</b></label>
+      <input [(ngModel)]="username" type="text" placeholder="Введите имя пользователя" name="username" id="username" required>
+
+      <label for="password"><b>Пароль</b></label>
+      <input [(ngModel)]="password" type="password" placeholder="Введите пароль" name="password" id="password" required>
+
+      <label for="password-repeat"><b>Повторите пароль</b></label>
+      <input [(ngModel)]="confirmPassword" type="password" placeholder="Повторите пароль" name="confirmPassword" id="confirmPassword" required>
+
+      <button type="submit" class="registerbtn" (click)="register()">Зарегистрироваться</button>
+    </div>
+
+    <div class="container signin">
+      <p>У вас уже есть аккаунт? <a routerLink="/login">Вход</a>.</p>
+    </div>
+  </form>
 </div>
