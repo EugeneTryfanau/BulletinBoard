@@ -5,9 +5,12 @@ namespace BulletinBoard.DAL.Entity
     public class Picture
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        [Required]
         public string? PicturePath { get; set; }
+
+        public int ProductId { get; set; }
+
+        public Product? Product { get; set; }
     }
 }

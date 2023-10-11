@@ -30,9 +30,6 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("AvatarPictureIDId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
@@ -91,8 +88,6 @@ namespace BulletinBoard.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AvatarPictureIDId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -108,16 +103,17 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("PicturePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -128,13 +124,11 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -146,6 +140,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -155,11 +150,15 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
                 });
@@ -428,13 +427,13 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d11e6b63-ca5e-4682-858c-44e6a8ffd2b6",
+                            Id = "33fee0d2-4a05-416f-8fef-7980a6d75325",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "fec5e0f5-5c4c-4d8d-a03c-bd66fa3b9956",
+                            Id = "552ccec9-40d3-4237-abf7-6b20ecac5ebc",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -548,37 +547,35 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.ApplicationUser", b =>
                 {
-                    b.HasOne("BulletinBoard.DAL.Entity.Picture", "AvatarPictureID")
-                        .WithMany()
-                        .HasForeignKey("AvatarPictureIDId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
-
-                    b.Navigation("AvatarPictureID");
 
                     b.Navigation("Role");
                 });
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
                 {
-                    b.HasOne("BulletinBoard.DAL.Entity.Product", null)
+                    b.HasOne("BulletinBoard.DAL.Entity.Product", "Product")
                         .WithMany("ProductPicturies")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
                 {
-                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", "User")
-                        .WithMany("Products")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BulletinBoard.DAL.Entity.ProductCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BulletinBoard.DAL.Entity.ApplicationUser", "User")
+                        .WithMany("Products")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

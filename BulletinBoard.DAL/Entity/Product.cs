@@ -1,34 +1,30 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BulletinBoard.DAL.Entity
 {
     public class Product
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
-        [Required]
-        public string? Name { get; set; }
+        public required string Name { get; set; }
 
-        public string? Description { get; set; }
+        public required string Description { get; set; }
 
-        [Required]
-        public ProductCategory? Category { get; set; }
+        public int CategoryId { get; set; }
 
-        [Required]
+        public required ProductCategory Category { get; set; }
+
         public double Price { get; set; }
 
-        [Required]
         public bool ConditionIsNew { get; set; }
 
-        [Required]
-        public string? ApplicationUserId { get; set; }
+        public required string UserId { get; set; }
 
-        [Required]
-        public ApplicationUser User { get; set; } = null!;
+        public required ApplicationUser User { get; set; }
 
-        [Required]
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; } = DateTime.Now;
 
         public List<Picture> ProductPicturies { get; set; } = new();
     }
