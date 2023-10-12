@@ -12,6 +12,9 @@ import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { CreateproductComponent } from './products/createproduct/createproduct.component';
+import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,8 @@ import { CategoriesComponent } from './categories/categories.component';
     ProductsComponent,
     UsersComponent,
     NavBarComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CreateproductComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,7 @@ import { CategoriesComponent } from './categories/categories.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, CategoryService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

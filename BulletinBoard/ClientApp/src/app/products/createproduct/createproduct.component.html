@@ -1,0 +1,36 @@
+<div>
+  <form class="create-prod-conteiner">
+
+    <h2>Объявление</h2>
+    <label for="productName"><b>Наименование товара</b></label>
+    <input [(ngModel)]="productName" type="text" name="productName" id="productName"
+           placeholder="Введите наименование товара" required [ngModelOptions]="{standalone: true}" />
+
+    <label for="productDescription"><b>Описание</b></label>
+    <textarea [(ngModel)]="productDescription" type="text" name="productDescription" id="productDescription"
+              placeholder="Введите описание товара" required [ngModelOptions]="{standalone: true}"
+              rows="5" cols="78"></textarea>
+
+    <label for="productCategoryId"><b>Категория товара</b></label>
+    <p>
+      <select name="dropdown" [(ngModel)]="productCategoryId" [ngModelOptions]="{standalone: true}">
+        <option class="dropdown-opt" *ngFor="let cat of categories" [value]="cat.id">{{cat.categoryName}}</option>
+      </select>
+    </p>
+
+
+    <label for="productPrice"><b>Стоимость</b></label>
+    <input [(ngModel)]="productPrice" type="text" name="productPrice" id="productPrice"
+           placeholder="Введите стоимость товара" required [ngModelOptions]="{standalone: true}" />
+
+    <label for="conditionIsNew"><b>Состояние товара</b></label>
+    <p>
+      <select name="dropdown" [(ngModel)]="conditionIsNew" [ngModelOptions]="{standalone: true}">
+        <option class="dropdown-opt" [value]="true">Новый</option>
+        <option class="dropdown-opt" [value]="false">Б/У</option>
+      </select>
+    </p>
+
+    <button type="submit" class="createbtn" (click)="create()">Разместить</button>
+  </form>
+</div>
