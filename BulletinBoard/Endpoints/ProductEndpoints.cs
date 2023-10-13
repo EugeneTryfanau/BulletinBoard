@@ -20,7 +20,14 @@ namespace BulletinBoard.Endpoints
             var products = await db.Products.CountAsync();
             if(products < 2) return 1;
 
-            products = products/2 + 1;
+            if(products % 2 == 0)
+            {
+                products /= 2;
+            }
+            else
+            {
+                products = products / 2 + 1;
+            }
 
             return products;
         }
