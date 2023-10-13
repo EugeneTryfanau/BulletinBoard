@@ -9,7 +9,7 @@ namespace BulletinBoard.Endpoints
 {
     public class ProductEndpoints
     {
-        public static async Task<List<Product>> GetProductsPage(ApplicationDbContext db, int page = 1, int pagesize = 1)
+        public static async Task<List<Product>> GetProductsPage(ApplicationDbContext db, int page = 1, int pagesize = 2)
         {
             var result = await db.Products.OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
             return result;
@@ -27,7 +27,7 @@ namespace BulletinBoard.Endpoints
 
         public static async Task<IResult> CreateProduct(CreateProductForm productForm, ApplicationDbContext db)
         {
-            var user = await db.Users.FirstOrDefaultAsync(x => x.UserName == "admin");
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Id == productForm.UserId);
             var category = await db.Categories.FirstOrDefaultAsync(x => x.Id == productForm.ProductCategoryId);
 
 

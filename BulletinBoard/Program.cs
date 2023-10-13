@@ -54,6 +54,6 @@ apiEndpoints.MapPost("/users/{userId}", UserEndpoints.UserPromotion).RequireAuth
 
 apiEndpoints.MapGet("/products/pages", ProductEndpoints.GetProductsPageCount);
 apiEndpoints.MapGet("/products/pages/{page:int}", ProductEndpoints.GetProductsPage);
-apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization("user", "admin");
+apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
 
 app.Run();

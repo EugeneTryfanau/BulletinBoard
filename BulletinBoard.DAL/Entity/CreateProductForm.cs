@@ -8,7 +8,7 @@ namespace BulletinBoard.DAL.Entity
 {
     public class CreateProductForm
     {
-        //public required string UserId { get; set; }
+        public required string UserId { get; set; }
 
         public required string ProductName { get; set; }
 

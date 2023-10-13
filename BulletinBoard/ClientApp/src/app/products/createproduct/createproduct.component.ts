@@ -27,12 +27,13 @@ export class CreateproductComponent {
 
   async ngOnInit() {
     this.categories = await firstValueFrom(this.http.get<any>("/api/categories"));
-    var user = this.auth
+    const user = await this.auth.loadUser();
+    this.userId = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
   }
 
   create() {
     return this.prodService.createProduct({
-      /*userId: this.userId,*/
+      userId: this.userId,
       productName: this.productName,
       productDescription: this.productDescription,
       productCategoryId: this.productCategoryId,
