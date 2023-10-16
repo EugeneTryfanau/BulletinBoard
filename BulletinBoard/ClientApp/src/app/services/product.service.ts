@@ -19,6 +19,12 @@ export class ProductService {
       })
   }
 
+  async getProductInfo(productId: number) {
+    return await firstValueFrom(
+      this.http.get<any>("/api/products/product/" + productId)
+    );
+  }
+
   async getTotalCountOfPages() {
     this.pages = await firstValueFrom(
       this.http.get<any>("/api/products/pages"));

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CategoryService } from '../category.service';
+import { CategoryService } from '../../services/category.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

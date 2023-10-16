@@ -1,18 +1,23 @@
-<h2>Главная страница</h2>
-
-<div class="row" *ngFor="let columns of productsOnPage">
-  <div class="column" *ngFor="let product of columns">
-    <div class="card">
-      <img src="../assets/icon24.png" alt="John" style="width:100%">
-      <h1>{{product.name}}</h1>
-      <p class="title">{{product.description}}</p>
-      <p>{{product.price}}</p>
-    </div>
-  </div>
+<div class="menu">
+  <app-categories></app-categories>
 </div>
 
-<div class="pagination">
-  <a routerLink="">&lsaquo;</a>
-  <a *ngFor="let page of paginationArray" [class]="currentPage == page ? isCurrent : notCurrent" (click)="toPage(page)">{{page}}</a>
-  <a routerLink="">&rsaquo;</a>
+<div class="products-conteiner">
+  <h2>Главная страница</h2>
+  <div class="row" *ngFor="let columns of productsOnPage">
+    <div class="column" *ngFor="let product of columns">
+      <div class="card">
+        <a routerLink="/products/product/{{product.id}}"><img src="../assets/icon24.png" alt="John" style="width:100%"></a>
+        <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
+        <p class="title">{{product.description}}</p>
+        <p>{{product.price}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pagination">
+    <a routerLink="">&lsaquo;</a>
+    <a *ngFor="let page of paginationArray" [class]="currentPage == page ? isCurrent : notCurrent" (click)="toPage(page)">{{page}}</a>
+    <a routerLink="">&rsaquo;</a>
+  </div>
 </div>

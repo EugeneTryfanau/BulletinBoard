@@ -1,4 +1,5 @@
-﻿using BulletinBoard.DAL.Entity;
+﻿using BulletinBoard.DAL.Data;
+using BulletinBoard.DAL.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
@@ -31,6 +32,15 @@ namespace BulletinBoard.Endpoints
             await signInManager.UserManager.AddToRoleAsync(user, "admin");
             
             return Results.BadRequest();
+        }
+
+        public static async Task<ApplicationUser?> GetUserInfo(ApplicationDbContext db, string userId)
+        {
+            var user = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            if(user != null) return user;
+
+            return null;
         }
     }
 }

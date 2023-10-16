@@ -1,0 +1,24 @@
+<div class="product-info-conteiner">
+  <h2 class="col">{{product?.name}}</h2>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <img src="../assets/icon24.png" class="mx-auto d-block" width="300" height="300">
+    </li>
+    <li class="list-group-item">
+      <strong>Дата создания объявления: </strong>{{product?.creationDate}}
+    </li>
+    <li class="list-group-item">
+      <strong>Стоимость: </strong>{{product?.price}} руб.
+    </li>
+    <li class="list-group-item">
+      <strong>Категория: </strong>{{product?.categoryId}}
+    </li>
+    <li class="list-group-item">
+      <strong>Описание: </strong>{{product?.description}}
+    </li>
+    <li class="list-group-item">
+      <span><i class="fas fa-exclamation-circle"></i></span>
+      <span> Администрация сайта не несет ответственности за предлагаемый товар.</span>
+    </li>
+  </ul>
+</div>

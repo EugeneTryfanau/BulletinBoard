@@ -1,9 +1,6 @@
 ﻿using BulletinBoard.DAL.Data;
 using BulletinBoard.DAL.Entity;
-using Duende.IdentityServer.Extensions;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace BulletinBoard.Endpoints
 {
@@ -18,9 +15,9 @@ namespace BulletinBoard.Endpoints
         public static async Task<int> GetProductsPageCount(ApplicationDbContext db)
         {
             var products = await db.Products.CountAsync();
-            if(products < 2) return 1;
+            if (products < 2) return 1;
 
-            if(products % 2 == 0)
+            if (products % 2 == 0)
             {
                 products /= 2;
             }
@@ -30,6 +27,13 @@ namespace BulletinBoard.Endpoints
             }
 
             return products;
+        }
+
+        public static async Task<Product?> GetProductById(ApplicationDbContext db, int productId)
+        {
+            var product = await db.Products.SingleOrDefaultAsync(x => x.Id == productId);
+
+            return product;
         }
 
         public static async Task<IResult> CreateProduct(CreateProductForm productForm, ApplicationDbContext db)

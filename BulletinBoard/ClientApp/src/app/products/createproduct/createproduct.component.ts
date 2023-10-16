@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../../product.service';
-import { AuthService } from '../../auth.service';
-import { CategoryService } from '../../category.service';
+import { ProductService } from '../../services/product.service';
+import { AuthService } from '../../services/auth.service';
+import { CategoryService } from '../../services/category.service';
 import { firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

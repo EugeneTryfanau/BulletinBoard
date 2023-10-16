@@ -4,17 +4,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './register/register.component';
-import { AuthService } from './auth.service';
-import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './users/register/register.component';
+import { AuthService } from './services/auth.service';
+import { LoginComponent } from './users/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ProductsComponent } from './products/products.component';
 import { UsersComponent } from './users/users.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { CategoriesComponent } from './categories/categories.component';
+import { CategoriesComponent } from './products/categories/categories.component';
 import { CreateproductComponent } from './products/createproduct/createproduct.component';
-import { CategoryService } from './category.service';
-import { ProductService } from './product.service';
+import { CategoryService } from './services/category.service';
+import { ProductService } from './services/product.service';
+import { ProductComponent } from './products/product/product.component';
+import { UserComponent } from './users/user/user.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ProductService } from './product.service';
     UsersComponent,
     NavBarComponent,
     CategoriesComponent,
-    CreateproductComponent
+    CreateproductComponent,
+    ProductComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

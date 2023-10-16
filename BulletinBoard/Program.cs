@@ -46,6 +46,7 @@ apiEndpoints.MapGet("/user", UserEndpoints.Handler);
 apiEndpoints.MapPost("/login", LoginEndpoint.Handler);
 apiEndpoints.MapPost("/register", RegisterEndpoint.Handler);
 apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
+//apiEndpoints.MapGet("/account/{userId}", UserEndpoints.GetUserInfo).RequireAuthorization();
 
 apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 
@@ -53,7 +54,8 @@ apiEndpoints.MapGet("/users", UserEndpoints.GetUsers).RequireAuthorization("admi
 apiEndpoints.MapPost("/users/{userId}", UserEndpoints.UserPromotion).RequireAuthorization("admin");
 
 apiEndpoints.MapGet("/products/pages", ProductEndpoints.GetProductsPageCount);
-apiEndpoints.MapGet("/products/pages/{page:int}", ProductEndpoints.GetProductsPage);
+apiEndpoints.MapGet("/products/pages/{page}", ProductEndpoints.GetProductsPage);
 apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
+apiEndpoints.MapGet("/products/product/{productId}", ProductEndpoints.GetProductById);
 
 app.Run();

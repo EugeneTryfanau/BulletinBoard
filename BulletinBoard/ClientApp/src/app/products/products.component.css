@@ -1,3 +1,14 @@
+.menu {
+    position: fixed;
+}
+
+.products-conteiner {
+    width: 99%;
+    margin-left: 200px;
+    padding-left: 5px;
+    position: fixed;
+}
+
 .column {
   float: left;
   width: 20%;
