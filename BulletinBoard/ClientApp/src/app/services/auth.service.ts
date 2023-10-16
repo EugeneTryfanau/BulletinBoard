@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { ChangePassword } from './models/changepassword';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,14 @@ export class AuthService {
       this.user = user
     }
     return user;
+  }
+
+  async getUserProfile(userId: any) {
+    return await firstValueFrom(this.http.get<any>("/api/user-profile/" + userId));
+  }
+
+  async changePassword(passModel: ChangePassword) {
+    return this.http.post("/api/user-profile/change-password", passModel);
   }
 
   login(loginForm: any) {

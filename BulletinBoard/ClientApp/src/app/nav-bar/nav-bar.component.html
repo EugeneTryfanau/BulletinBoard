@@ -6,7 +6,7 @@
   </div>
   <div class="signPart">
     <a routerLink="/" class="logout" *ngIf="visibility" (click)="logout()">Выход</a>
-    <a routerLink="/" class="userProfile" *ngIf="visibility">{{userName}}</a>
+    <a routerLink="/user-profile" class="userProfile" *ngIf="visibility">{{userName}}</a>
     <a routerLink="/register" *ngIf="!visibility">Регистрация</a>
     <a routerLink="/login" *ngIf="!visibility">Вход</a>
     <a routerLink="/create-product" *ngIf="visibility">Разместить объявление</a>

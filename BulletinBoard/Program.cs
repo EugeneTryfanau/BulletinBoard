@@ -46,7 +46,8 @@ apiEndpoints.MapGet("/user", UserEndpoints.Handler);
 apiEndpoints.MapPost("/login", LoginEndpoint.Handler);
 apiEndpoints.MapPost("/register", RegisterEndpoint.Handler);
 apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
-//apiEndpoints.MapGet("/account/{userId}", UserEndpoints.GetUserInfo).RequireAuthorization();
+apiEndpoints.MapGet("/user-profile/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
+apiEndpoints.MapPost("/user-profile/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
 
 apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 

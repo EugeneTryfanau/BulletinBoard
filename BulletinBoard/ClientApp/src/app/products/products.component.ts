@@ -32,7 +32,6 @@ export class ProductsComponent {
     for (let i = 0; i < Math.ceil(prodarray.length / size); i++) {
       this.productsOnPage[i] = prodarray.slice((i * size), (i * size) + size);
     }
-    console.log(this.productsOnPage);
   }
 
   async toPage(page: number) {
@@ -42,8 +41,6 @@ export class ProductsComponent {
     for (let i = 0; i < Math.ceil(prodarray.length / size); i++) {
       this.productsOnPage[i] = prodarray.slice((i * size), (i * size) + size);
     }
-    console.log(this.currentPage);
-
   }
 
 }
