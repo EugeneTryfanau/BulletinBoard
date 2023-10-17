@@ -6,27 +6,56 @@ namespace BulletinBoard.Endpoints
 {
     public class ProductEndpoints
     {
-        public static async Task<List<Product>> GetProductsPage(ApplicationDbContext db, int page = 1, int pagesize = 2)
+        public static async Task<List<Product>> GetProductsPage(ApplicationDbContext db, int page = 1, int category = 0, int pagesize = 2)
         {
-            var result = await db.Products.OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
-            return result;
-        }
-
-        public static async Task<int> GetProductsPageCount(ApplicationDbContext db)
-        {
-            var products = await db.Products.CountAsync();
-            if (products < 2) return 1;
-
-            if (products % 2 == 0)
+            if (category == 0)
             {
-                products /= 2;
+                var result = await db.Products.OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
+                return result;
             }
             else
             {
-                products = products / 2 + 1;
+                var result = await db.Products.Where<Product>(x => x.CategoryId == category)
+                                .OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
+                return result;
             }
 
-            return products;
+        }
+
+        public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0)
+        {
+            if(category == 0)
+            {
+                var products = await db.Products.CountAsync();
+                if (products < 2) return 1;
+
+                if (products % 2 == 0)
+                {
+                    products /= 2;
+                }
+                else
+                {
+                    products = products / 2 + 1;
+                }
+
+                return products;
+            }
+            else
+            {
+                var products = await db.Products.Where<Product>(x => x.CategoryId == category).CountAsync();
+                if (products < 2) return 1;
+
+                if (products % 2 == 0)
+                {
+                    products /= 2;
+                }
+                else
+                {
+                    products = products / 2 + 1;
+                }
+
+                return products;
+            }
         }
 
         public static async Task<Product?> GetProductById(ApplicationDbContext db, int productId)

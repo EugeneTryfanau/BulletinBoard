@@ -10,11 +10,13 @@ import { ProductService } from '../services/product.service';
 export class ProductsComponent {
 
   elements: any = document.getElementsByClassName("column");
-  i: number = 0;
+  pageTitle: any = "Главная страница";
   currentPage: number = 1;
+  currentCategory: number = 0;
   totalPages: number = 1;
   paginationArray: any = [];
   productsOnPage: any = [];
+
   isCurrent: string = "active";
   notCurrent: string = "notcurrent";
 
@@ -34,10 +36,21 @@ export class ProductsComponent {
     }
   }
 
-  async toPage(page: number) {
+  async toPage(page: number, category: number = 0) {
     this.currentPage = page;
-    var prodarray = await this.prod.getProductsOnPage(page);
+    this.currentCategory = category;
+
+    if (category != 0) {
+      this.paginationArray = [];
+      this.totalPages = await this.prod.getTotalCountOfPages(category);
+      for (let i = 0; i < this.totalPages && i < 6; i++) {
+        this.paginationArray[i] = i + 1;
+      }
+    }
+
+    var prodarray = await this.prod.getProductsOnPage(page, category);
     let size = 5;
+    this.productsOnPage = [];
     for (let i = 0; i < Math.ceil(prodarray.length / size); i++) {
       this.productsOnPage[i] = prodarray.slice((i * size), (i * size) + size);
     }

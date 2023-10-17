@@ -1,7 +1,7 @@
 <div class="sidenav-conteiner">
   <h3>Категории</h3>
   <div class="sidenav" *ngFor="let category of categories">
-    <a>{{category.categoryName}}</a>
+    <div class="categoryLink" (click)="filterOnCategory(category.id)">{{category.categoryName}}</div>
   </div>
 </div>
 

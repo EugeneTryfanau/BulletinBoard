@@ -54,8 +54,8 @@ apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 apiEndpoints.MapGet("/users", UserEndpoints.GetUsers).RequireAuthorization("admin");
 apiEndpoints.MapPost("/users/{userId}", UserEndpoints.UserPromotion).RequireAuthorization("admin");
 
-apiEndpoints.MapGet("/products/pages", ProductEndpoints.GetProductsPageCount);
-apiEndpoints.MapGet("/products/pages/{page}", ProductEndpoints.GetProductsPage);
+apiEndpoints.MapGet("/products/pages/{category}", ProductEndpoints.GetProductsPageCount);
+apiEndpoints.MapGet("/products/pages/{category}/{page}", ProductEndpoints.GetProductsPage);
 apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
 apiEndpoints.MapGet("/products/product/{productId}", ProductEndpoints.GetProductById);
 
