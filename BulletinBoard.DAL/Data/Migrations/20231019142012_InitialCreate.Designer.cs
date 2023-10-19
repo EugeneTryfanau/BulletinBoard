@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BulletinBoard.DAL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231011124819_InitialCreate")]
+    [Migration("20231019142012_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace BulletinBoard.DAL.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.11")
+                .HasAnnotation("ProductVersion", "7.0.12")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -104,7 +104,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,17 +112,25 @@ namespace BulletinBoard.DAL.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsPrimary")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PicturePath")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Pictures");
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
@@ -430,13 +438,13 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "33fee0d2-4a05-416f-8fef-7980a6d75325",
+                            Id = "349f2c2e-f965-43d0-8115-bd93adab2ebf",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "552ccec9-40d3-4237-abf7-6b20ecac5ebc",
+                            Id = "3b691fd3-f722-44ba-bafa-b5b168b80b61",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -557,10 +565,10 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
+            modelBuilder.Entity("BulletinBoard.DAL.Entity.Photo", b =>
                 {
                     b.HasOne("BulletinBoard.DAL.Entity.Product", "Product")
-                        .WithMany("ProductPicturies")
+                        .WithMany("Photos")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -645,7 +653,7 @@ namespace BulletinBoard.DAL.Data.Migrations
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
                 {
-                    b.Navigation("ProductPicturies");
+                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }

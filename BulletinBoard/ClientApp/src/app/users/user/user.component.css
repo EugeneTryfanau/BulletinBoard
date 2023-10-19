@@ -1,0 +1,62 @@
+.products-conteiner {
+  width: 99%;
+  padding-left: 5px;
+  position: fixed;
+}
+
+.column {
+  float: left;
+  width: 20%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+  a:hover {
+    opacity: 0.7;
+  }
+
+.btn-change, .btn-delete {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  width: 50%;
+  font-size: 18px;
+}
+  .btn-change:hover, .btn-delete:hover {
+    opacity: 0.7;
+  }
+
+.btn-change {
+    background-color:forestgreen;
+}
+
+.btn-delete {
+    background-color: orangered;
+}

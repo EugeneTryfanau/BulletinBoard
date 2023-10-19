@@ -12,7 +12,15 @@ namespace BulletinBoard.Endpoints
                 return Results.BadRequest();
             }
 
-            var user = new ApplicationUser() { UserName = form.Username };
+            var user = new ApplicationUser()
+            {
+                UserName = form.Username,
+                Email = form.Email,
+                City = form.City != null ? form.City : null,
+                PhoneNumber = form.PhoneNumber != null ? form.PhoneNumber : null,
+                Gender = form.Gender != null ? form.Gender : null,
+                BirthDate = form.BirthdayDate != null ? Convert.ToDateTime(form.BirthdayDate) : DateTime.Now
+            };
             var userCreateResult = await userManager.CreateAsync(user, form.Password);
             await userManager.AddToRoleAsync(user, "user");
 

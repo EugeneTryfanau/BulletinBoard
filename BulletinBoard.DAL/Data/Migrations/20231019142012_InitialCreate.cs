@@ -269,19 +269,21 @@ namespace BulletinBoard.DAL.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pictures",
+                name: "Photos",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PicturePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsPrimary = table.Column<bool>(type: "bit", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pictures", x => x.Id);
+                    table.PrimaryKey("PK_Photos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pictures_Products_ProductId",
+                        name: "FK_Photos_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -293,8 +295,8 @@ namespace BulletinBoard.DAL.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "33fee0d2-4a05-416f-8fef-7980a6d75325", null, "admin", "ADMIN" },
-                    { "552ccec9-40d3-4237-abf7-6b20ecac5ebc", null, "user", "USER" }
+                    { "349f2c2e-f965-43d0-8115-bd93adab2ebf", null, "admin", "ADMIN" },
+                    { "3b691fd3-f722-44ba-bafa-b5b168b80b61", null, "user", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -400,8 +402,8 @@ namespace BulletinBoard.DAL.Data.Migrations
                 columns: new[] { "SubjectId", "SessionId", "Type" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pictures_ProductId",
-                table: "Pictures",
+                name: "IX_Photos_ProductId",
+                table: "Photos",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -443,7 +445,7 @@ namespace BulletinBoard.DAL.Data.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
-                name: "Pictures");
+                name: "Photos");
 
             migrationBuilder.DropTable(
                 name: "Products");

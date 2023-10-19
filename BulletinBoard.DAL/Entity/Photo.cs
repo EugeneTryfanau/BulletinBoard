@@ -2,12 +2,16 @@
 
 namespace BulletinBoard.DAL.Entity
 {
-    public class Picture
+    public class Photo
     {
         [Key]
         public int Id { get; set; }
 
-        public string? PicturePath { get; set; }
+        public required string PublicId { get; set; }
+
+        public required string PicturePath { get; set; }
+
+        public bool IsPrimary { get; set; }
 
         public int ProductId { get; set; }
 

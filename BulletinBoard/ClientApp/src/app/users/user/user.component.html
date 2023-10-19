@@ -1,4 +1,4 @@
-<div class="card" *ngIf="userDetails">
+<div class="user-card" *ngIf="userDetails">
   <h1>Мой кабинет</h1>
   <ul class="list-group">
     <li class="list-group-item">
@@ -20,21 +20,40 @@
       <strong>Дата рождения: </strong>{{userDetails.birthDate}}
     </li>
     <li>
-    <br>
-    <form #form="ngForm" autocomplete="off" (submit)="changePassword(form)">
-      <div class="form-group">
-        <input name="userId" #userId="ngModel" [(ngModel)]="passModel.userId"
-               type="hidden" class="form-control" placeholder="id" required>
-        <input name="newPassword" #newPassword="ngModel" [(ngModel)]="passModel.newPassword"
-               class="form-control" placeholder="Новый пароль." required>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-info btn-block" [disabled]="form.invalid">
-          Изменить
-          пароль
-        </button>
-      </div>
-    </form>
-  </li>
+      <br>
+      <form #form="ngForm" autocomplete="off" (submit)="changePassword(form)">
+        <div class="form-group">
+          <input name="userId" #userId="ngModel" [(ngModel)]="passModel.userId"
+                 type="hidden" class="form-control" placeholder="id" required>
+          <input name="newPassword" #newPassword="ngModel" [(ngModel)]="passModel.newPassword"
+                 class="form-control" placeholder="Новый пароль." required>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-info btn-block" [disabled]="form.invalid">
+            Изменить
+            пароль
+          </button>
+        </div>
+      </form>
+
+      <a routerLink="/" class="btn-delete" *ngIf="userDetails.userName != 'admin'" (click)="deleteAccount(userDetails.id)">Удалить аккаунт</a>
+    </li>
   </ul>
+
+  <br />
+
+  <div class="products-conteiner">
+    <h2>Ваши объявления</h2>
+    <div class="row" *ngFor="let columns of productsInGroups">
+      <div class="column" *ngFor="let product of columns">
+        <div class="card">
+          <a routerLink="/products/product/{{product.id}}"><img src="../assets/icon24.png" alt="{{product.name}}" style="width:100%"></a>
+          <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
+          <p class="title">{{product.description}}</p>
+          <p>{{product.price}}</p>
+          <p><button class="btn-change">Изменить</button><button class="btn-delete" (click)="deleteUserProductById(product.id)">Удалить</button></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

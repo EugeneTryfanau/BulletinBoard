@@ -40,6 +40,7 @@ export class AuthService {
   }
 
   register(registerForm: any) {
+    console.log(registerForm);
     return this.http.post<any>("/api/register", registerForm, { withCredentials: true })
       .subscribe(_ => {
         this.loadUser();
@@ -49,6 +50,14 @@ export class AuthService {
 
   logout() {
     return this.http.get("/api/logout")
+      .subscribe(_ => {
+        this.user = null;
+        window.location.href = "/";
+      });
+  }
+
+  deleteAccount(userId: string) {
+    return this.http.get("/api/delete-account/" + userId)
       .subscribe(_ => {
         this.user = null;
         window.location.href = "/";

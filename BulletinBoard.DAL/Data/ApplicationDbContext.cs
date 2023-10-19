@@ -13,7 +13,7 @@ namespace BulletinBoard.DAL.Data
 
         public DbSet<Product> Products { get; set; } = null!;
 
-        public DbSet<Picture> Pictures { get; set; } = null!;
+        public DbSet<Photo> Photos { get; set; } = null!;
 
         public ApplicationDbContext(DbContextOptions options, IOptions<OperationalStoreOptions> operationalStoreOptions)
             : base(options, operationalStoreOptions)

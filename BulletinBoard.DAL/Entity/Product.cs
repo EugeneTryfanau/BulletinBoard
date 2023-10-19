@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BulletinBoard.DAL.Entity
 {
@@ -26,6 +25,6 @@ namespace BulletinBoard.DAL.Entity
 
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public List<Picture> ProductPicturies { get; set; } = new();
+        public List<Photo> Photos { get; set; } = new();
     }
 }
