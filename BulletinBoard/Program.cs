@@ -2,6 +2,8 @@ using BulletinBoard;
 using BulletinBoard.DAL.Data;
 using BulletinBoard.DAL.Entity;
 using BulletinBoard.Endpoints;
+using BulletinBoard.Interfaces;
+using BulletinBoard.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString, x => x.MigrationsAssembly("BulletinBoard.DAL")));
+
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     {
@@ -48,6 +52,9 @@ apiEndpoints.MapPost("/register", RegisterEndpoint.Handler);
 apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
 apiEndpoints.MapGet("/user-profile/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
 apiEndpoints.MapPost("/user-profile/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
+apiEndpoints.MapGet("/delete-account/{userId}", UserEndpoints.DeleteAccount).RequireAuthorization();
+apiEndpoints.MapGet("/user-profile/products/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
+apiEndpoints.MapGet("/delete-product/{productId}", ProductEndpoints.DeleteProductById).RequireAuthorization();
 
 apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 
@@ -58,5 +65,6 @@ apiEndpoints.MapGet("/products/pages/{category}", ProductEndpoints.GetProductsPa
 apiEndpoints.MapGet("/products/pages/{category}/{page}", ProductEndpoints.GetProductsPage);
 apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
 apiEndpoints.MapGet("/products/product/{productId}", ProductEndpoints.GetProductById);
+apiEndpoints.MapPost("/products/create/photo/{productId}", PhotoEndpoints.AddPhoto).RequireAuthorization();
 
 app.Run();

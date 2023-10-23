@@ -14,8 +14,6 @@ namespace BulletinBoard
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(_ => { });
-
             app.Use((ctx, next) =>
             {
                 if (ctx.Request.Path.StartsWithSegments("/api"))

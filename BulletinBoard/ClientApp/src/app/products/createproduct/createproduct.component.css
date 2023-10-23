@@ -9,7 +9,7 @@
   background-color: #f2f2f2;
 }
 
-input[type=text], input[type = number] {
+input[type=text] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -17,7 +17,7 @@ input[type=text], input[type = number] {
   background: white;
 }
 
-  input[type=text], input[type = number]:focus {
+  input[type=text]:focus {
     background-color: #ddd;
     outline: none;
   }

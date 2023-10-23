@@ -19,7 +19,7 @@ namespace BulletinBoard.Endpoints
             return users;
         }
 
-        public static async Task<ApplicationUser?> GetUserDetails(SignInManager<ApplicationUser> signInManager, ApplicationDbContext db, string userId)
+        public static async Task<ApplicationUser?> GetUserDetails(ApplicationDbContext db, string userId)
         {
             var userInfo = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
