@@ -16,10 +16,10 @@ namespace BulletinBoard.Endpoints
             {
                 UserName = form.Username,
                 Email = form.Email,
-                City = form.City != null ? form.City : null,
-                PhoneNumber = form.PhoneNumber != null ? form.PhoneNumber : null,
-                Gender = form.Gender != null ? form.Gender : null,
-                BirthDate = form.BirthdayDate != null ? Convert.ToDateTime(form.BirthdayDate) : DateTime.Now
+                City = form.City != null && form.City != "" ? form.City : null,
+                PhoneNumber = form.PhoneNumber != null && form.PhoneNumber != "" ? form.PhoneNumber : null,
+                Gender = form.Gender != null && form.Gender != "" ? form.Gender : null,
+                BirthDate = form.BirthdayDate != null && form.BirthdayDate != "" ? Convert.ToDateTime(form.BirthdayDate) : DateTime.Now
             };
             var userCreateResult = await userManager.CreateAsync(user, form.Password);
             await userManager.AddToRoleAsync(user, "user");
