@@ -24,7 +24,7 @@ namespace BulletinBoard.Endpoints
 
         public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0)
         {
-            if(category == 0)
+            if (category == 0)
             {
                 var products = await db.Products.CountAsync();
                 if (products < 2) return 1;
@@ -90,6 +90,25 @@ namespace BulletinBoard.Endpoints
             }
 
             return Results.BadRequest();
+        }
+
+        public static async Task<List<Product>> GetUsersProducts(ApplicationDbContext db, string userId)
+        {
+            var usersProducts = await db.Products.Where(x => x.UserId == userId).ToListAsync();
+            return usersProducts;
+        }
+
+        public static async Task<IResult> DeleteProductById(ApplicationDbContext db, int productId)
+        {
+            var product = await db.Products.FirstOrDefaultAsync(x => x.Id == productId);
+            if (product == null)
+            {
+                return Results.BadRequest("Wrong productId");
+            }
+            _ = db.Products.Remove(product);
+            db.SaveChanges();
+
+            return Results.Ok();
         }
     }
 }

@@ -3,9 +3,28 @@
     <div class="container">
       <h2>Регистрация</h2>
 
-      <label for="email"><b>Имя пользователя</b></label>
+      <label for="email"><b>Email</b></label>
+      <input [(ngModel)]="email" type="text" placeholder="Введите ваш Email" name="email" id="email" required [ngModelOptions]="{standalone: true}">
+
+      <label for="username"><b>Имя пользователя</b></label>
       <input [(ngModel)]="username" type="text" placeholder="Введите имя пользователя" name="username" id="username" required [ngModelOptions]="{standalone: true}">
 
+      <fieldset class="notneсessory">
+        <legend class="legend" (click)="hideShowNotNecessory()">Не обязательно при регистрации ({{addInfoToField}})</legend>
+        <label *ngIf="notNecessory" for="gender"><b>Пол</b></label>
+        <input *ngIf="notNecessory" [(ngModel)]="gender" type="text" placeholder="Введите ваш пол" name="gender" id="gender" [ngModelOptions]="{standalone: true}">
+
+        <label *ngIf="notNecessory" for="city"><b>Город</b></label>
+        <input *ngIf="notNecessory" [(ngModel)]="city" type="text" placeholder="Введите ваш город" name="city" id="city" [ngModelOptions]="{standalone: true}">
+
+        <label *ngIf="notNecessory" for="phoneNumber"><b>Номер телефона</b></label>
+        <input *ngIf="notNecessory" [(ngModel)]="phoneNumber" type="text" placeholder="Введите ваш номер телефона" name="phoneNumber" id="phoneNumber" [ngModelOptions]="{standalone: true}">
+
+        <label *ngIf="notNecessory" for="birthdayDate"><b>Дата рождения</b></label>
+        <input *ngIf="notNecessory" [(ngModel)]="birthdayDate" type="text" placeholder="Введите дату рождения" name="birthdayDate" id="birthdayDate" [ngModelOptions]="{standalone: true}">
+      </fieldset>
+      <p></p>
+      
       <label for="password"><b>Пароль</b></label>
       <input [(ngModel)]="password" type="password" placeholder="Введите пароль" name="password" id="password" required [ngModelOptions]="{standalone: true}">
 

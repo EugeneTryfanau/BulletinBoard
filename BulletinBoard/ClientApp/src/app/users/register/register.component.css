@@ -2,6 +2,19 @@
   box-sizing: border-box;
 }
 
+.notneсessory {
+  width: 100%;
+  margin: 0;
+  padding: 5px;
+  font-size: 1em;
+  border: solid 1px grey;
+}
+
+  .notneсessory legend {
+    padding: 0 1em;
+    cursor: pointer;
+  }
+
 .register-conteiner {
   margin: auto;
   max-width: 600px;

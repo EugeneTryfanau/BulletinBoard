@@ -19,7 +19,7 @@ namespace BulletinBoard.Endpoints
             return users;
         }
 
-        public static async Task<ApplicationUser?> GetUserDetails(ApplicationDbContext db, string userId)
+        public static async Task<ApplicationUser?> GetUserDetails(SignInManager<ApplicationUser> signInManager, ApplicationDbContext db, string userId)
         {
             var userInfo = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
@@ -40,6 +40,11 @@ namespace BulletinBoard.Endpoints
                     userManager.PasswordValidators.FirstOrDefault();
                 var _passwordHasher =
                     userManager.PasswordHasher;
+
+                if (_passwordValidator == null)
+                {
+                    return Results.BadRequest("Validator error, check password validator");
+                }
 
                 IdentityResult result =
                     await _passwordValidator.ValidateAsync(userManager, user, model.NewPassword);
@@ -78,6 +83,20 @@ namespace BulletinBoard.Endpoints
             await signInManager.UserManager.AddToRoleAsync(user, "admin");
 
             return Results.BadRequest();
+        }
+
+        public static async Task<IResult> DeleteAccount(SignInManager<ApplicationUser> signInManager, string userId)
+        {
+            var user = await signInManager.UserManager.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            if (user == null)
+            {
+                return Results.BadRequest("Wrong userId");
+            }
+
+            await signInManager.SignOutAsync();
+            _ = await signInManager.UserManager.DeleteAsync(user);
+
+            return Results.Ok();
         }
     }
 }

@@ -48,4 +48,15 @@ export class ProductService {
     return this.currentCategory;
   }
 
+  async getUsersProducts(userId: string) {
+    return await firstValueFrom(this.http.get<any>("/api/user-profile/products/" + userId));
+  }
+
+  async deleteUserProductById(productId: number) {
+    return this.http.get("/api/delete-product/" + productId)
+      .subscribe(_ => {
+        window.location.reload();
+      });
+  }
+
 }
