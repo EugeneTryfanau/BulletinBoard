@@ -25,6 +25,6 @@ namespace BulletinBoard.DAL.Entity
 
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
-        public List<Photo> Photos { get; set; } = new();
+        public List<Picture> Pictures { get; set; } = new();
     }
 }
