@@ -1,6 +1,8 @@
 ﻿using BulletinBoard.DAL.Data;
 using BulletinBoard.DAL.Entity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace BulletinBoard.Endpoints
 {
@@ -10,12 +12,13 @@ namespace BulletinBoard.Endpoints
         {
             if (category == 0)
             {
-                var result = await db.Products.OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
+                var result = await db.Products.Include(x => x.Pictures)
+                    .OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
                 return result;
             }
             else
             {
-                var result = await db.Products.Where<Product>(x => x.CategoryId == category)
+                var result = await db.Products.Include(x => x.Pictures).Where<Product>(x => x.CategoryId == category)
                                 .OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
                 return result;
             }
@@ -60,7 +63,7 @@ namespace BulletinBoard.Endpoints
 
         public static async Task<Product?> GetProductById(ApplicationDbContext db, int productId)
         {
-            var product = await db.Products.SingleOrDefaultAsync(x => x.Id == productId);
+            var product = await db.Products.Include(x => x.Pictures).SingleOrDefaultAsync(x => x.Id == productId);
 
             return product;
         }
@@ -101,7 +104,7 @@ namespace BulletinBoard.Endpoints
 
         public static async Task<List<Product>> GetUsersProducts(ApplicationDbContext db, string userId)
         {
-            var usersProducts = await db.Products.Where(x => x.UserId == userId).ToListAsync();
+            var usersProducts = await db.Products.Include(x => x.Pictures).Where(x => x.UserId == userId).ToListAsync();
             return usersProducts;
         }
 
