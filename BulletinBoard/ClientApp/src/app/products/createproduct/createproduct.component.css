@@ -44,3 +44,16 @@ textarea {
   border: 1px solid white;
 }
 
+.dropdown {
+  padding: 16px 20px;
+  border: none;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.upload {
+  font-weight: bold;
+  color: #28a745;
+  margin-left: 15px;
+  line-height: 36px;
+}

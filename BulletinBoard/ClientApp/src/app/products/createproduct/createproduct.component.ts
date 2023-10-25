@@ -23,6 +23,8 @@ export class CreateproductComponent {
   productPrice: any = 0;
   conditionIsNew: any = true;
 
+  productFile: any;
+
   categories: any = [];
 
   constructor(private http: HttpClient, private prodService: ProductService, private auth: AuthService, private categoryService: CategoryService) {
@@ -38,7 +40,7 @@ export class CreateproductComponent {
     }
     let fileToUpload = <File>files[0];
     const formData = new FormData();
-    formData.append('file', fileToUpload, fileToUpload.name);
+    formData.append('file', fileToUpload, this.productName + "_" + this.userId + "." + fileToUpload.name.split('.')[1]);
 
     this.http.post("/api/upload", formData, { reportProgress: true, observe: 'events' })
       .subscribe({

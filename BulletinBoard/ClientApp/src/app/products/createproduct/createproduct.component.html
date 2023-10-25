@@ -13,7 +13,7 @@
 
     <label for="productCategoryId"><b>Категория товара</b></label>
     <p>
-      <select name="dropdown" [(ngModel)]="productCategoryId" [ngModelOptions]="{standalone: true}">
+      <select class="dropdown" [(ngModel)]="productCategoryId" [ngModelOptions]="{standalone: true}">
         <option class="dropdown-opt" *ngFor="let cat of categories" [value]="cat.id">{{cat.categoryName}}</option>
       </select>
     </p>
@@ -25,17 +25,16 @@
 
     <label for="conditionIsNew"><b>Состояние товара</b></label>
     <p>
-      <select name="dropdown" [(ngModel)]="conditionIsNew" [ngModelOptions]="{standalone: true}">
+      <select class="dropdown" name="dropdown" [(ngModel)]="conditionIsNew" [ngModelOptions]="{standalone: true}">
         <option class="dropdown-opt" [value]="true">Новый</option>
         <option class="dropdown-opt" [value]="false">Б/У</option>
       </select>
     </p>
 
     <div class="row" style="margin-bottom:15px;">
-      <h2>As read:</h2>
       <div class="col-md-3">
         <input type="file" #file placeholder="Выбрать" (change)="uploadFile(file.files)" style="display:none;" multiple>
-        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+        <button type="button" class="btn btn-success" (click)="file.click()">Выбрать фото</button>
       </div>
       <div class="col-md-4">
         <span class="upload" *ngIf="progress > 0">
@@ -47,6 +46,6 @@
       </div>
     </div>
 
-    <button type="submit" class="createbtn" (click)="create()">Разместить</button>
+    <button type="button" class="btn" (click)="create()">Разместить</button>
   </form>
 </div>
