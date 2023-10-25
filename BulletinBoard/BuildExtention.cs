@@ -1,5 +1,6 @@
 ﻿using BulletinBoard.DAL.Entity;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.FileProviders;
 
 namespace BulletinBoard
 {
@@ -10,6 +11,13 @@ namespace BulletinBoard
             var app = builder.Build();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
+                RequestPath = new PathString("/Resources")
+            });
 
             app.UseAuthentication();
             app.UseAuthorization();
