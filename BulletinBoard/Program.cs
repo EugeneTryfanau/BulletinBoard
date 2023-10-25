@@ -56,6 +56,9 @@ apiEndpoints.MapPost("/register", RegisterEndpoint.Handler);
 apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
 apiEndpoints.MapGet("/user-profile/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
 apiEndpoints.MapPost("/user-profile/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
+apiEndpoints.MapGet("/delete-account/{userId}", UserEndpoints.DeleteAccount).RequireAuthorization();
+apiEndpoints.MapGet("/user-profile/products/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
+apiEndpoints.MapGet("/delete-product/{productId}", ProductEndpoints.DeleteProductById).RequireAuthorization();
 
 apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 
@@ -66,6 +69,7 @@ apiEndpoints.MapGet("/products/pages/{category}", ProductEndpoints.GetProductsPa
 apiEndpoints.MapGet("/products/pages/{category}/{page}", ProductEndpoints.GetProductsPage);
 apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
 apiEndpoints.MapGet("/products/product/{productId}", ProductEndpoints.GetProductById);
-apiEndpoints.MapPost("/upload", PictureEndpoints.UploadPicture);
+apiEndpoints.MapGet("/products/product/last/{userId}", ProductEndpoints.GetLastCreatedProductByUserId).RequireAuthorization();
+apiEndpoints.MapPost("/upload/{productId}", PictureEndpoints.UploadPicture).RequireAuthorization();
 
 app.Run();

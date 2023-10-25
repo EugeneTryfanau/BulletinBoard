@@ -1,7 +1,22 @@
 <div>
+  <h2>Объявление</h2>
+  <div class="row" style="margin-bottom:15px;">
+    <div class="col-md-3">
+      <input type="file" #file placeholder="Выбрать" (change)="uploadFile(file.files)" style="display:none;" multiple>
+      <button type="button" class="btn btn-success" *ngIf="productName != emptyString" (click)="file.click()">Выбрать фото</button>
+    </div>
+    <div class="col-md-4">
+      <span class="upload" *ngIf="pic.progress > 0">
+        {{pic.progress}}%
+      </span>
+      <span class="upload" *ngIf="pic.message">
+        {{pic.message}}
+      </span>
+    </div>
+  </div>
+
   <form class="create-prod-conteiner">
 
-    <h2>Объявление</h2>
     <label for="productName"><b>Наименование товара</b></label>
     <input [(ngModel)]="productName" type="text" name="productName" id="productName"
            placeholder="Введите наименование товара" required [ngModelOptions]="{standalone: true}" />
@@ -30,21 +45,6 @@
         <option class="dropdown-opt" [value]="false">Б/У</option>
       </select>
     </p>
-    
-    <div class="row" style="margin-bottom:15px;">
-      <div class="col-md-3">
-        <input type="file" #file placeholder="Выбрать" (change)="uploadFile(file.files)" style="display:none;" multiple>
-        <button type="button" class="btn btn-success" *ngIf="productName != emptyString" (click)="file.click()">Выбрать фото</button>
-      </div>
-      <div class="col-md-4">
-        <span class="upload" *ngIf="pic.progress > 0">
-          {{pic.progress}}%
-        </span>
-        <span class="upload" *ngIf="pic.message">
-          {{pic.message}}
-        </span>
-      </div>
-    </div>
 
     <button type="button" class="btn" (click)="create()">Разместить</button>
   </form>

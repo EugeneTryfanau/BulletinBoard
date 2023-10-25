@@ -11,13 +11,16 @@ export class ProductService {
   pages: number = 0;
   currentCategory: number = 0;
 
+  newlyCreateId: number = -1;
+
   constructor(private http: HttpClient) { }
   
-  createProduct(createForm: any) {
-    return this.http.post<any>("/api/products/create", createForm, { withCredentials: true })
-      .subscribe(_ => {
-        window.location.href = "/";
-      })
+  async createProduct(createForm: any) {
+    return await this.http.post<any>("/api/products/create", createForm, { withCredentials: true });
+  }
+
+  async lastCreatedProductByUser(userId: string) {
+    return await firstValueFrom(this.http.get<any>("/api/products/product/last/" + userId));
   }
 
   async getProductInfo(productId: number) {

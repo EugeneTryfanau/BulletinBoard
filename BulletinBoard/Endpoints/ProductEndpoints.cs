@@ -65,6 +65,13 @@ namespace BulletinBoard.Endpoints
             return product;
         }
 
+        public static async Task<int> GetLastCreatedProductByUserId(ApplicationDbContext db, string userId)
+        {
+            var product = await db.Products.Where(x => x.UserId == userId).MaxAsync(s => s.Id);
+
+            return product;
+        }
+
         public static async Task<IResult> CreateProduct(CreateProductForm productForm, ApplicationDbContext db)
         {
             var user = await db.Users.FirstOrDefaultAsync(x => x.Id == productForm.UserId);
@@ -73,22 +80,22 @@ namespace BulletinBoard.Endpoints
 
             if (user != null && category != null)
             {
-                user.Products.Add(
-                        new Product()
-                        {
-                            Name = productForm.ProductName,
-                            Description = productForm.ProductDescription,
-                            Category = category,
-                            User = user,
-                            UserId = user.Id,
-                            Price = productForm.ProductPrice,
-                            ConditionIsNew = productForm.ConditionIsNew
-                        });
+                var product = new Product()
+                {
+                    Name = productForm.ProductName,
+                    Description = productForm.ProductDescription,
+                    Category = category,
+                    User = user,
+                    UserId = user.Id,
+                    Price = productForm.ProductPrice,
+                    ConditionIsNew = productForm.ConditionIsNew
+                };
+
+                user.Products.Add(product);
                 db.SaveChanges();
 
                 return Results.Ok();
             }
-
             return Results.BadRequest();
         }
 

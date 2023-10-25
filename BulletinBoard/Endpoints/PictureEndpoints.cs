@@ -1,13 +1,17 @@
-﻿using Azure.Core;
-using BulletinBoard.DAL.Data;
+﻿using BulletinBoard.DAL.Data;
+using BulletinBoard.DAL.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;
 
 namespace BulletinBoard.Endpoints
 {
     public class PictureEndpoints
     {
-        public static async Task<IResult> UploadPicture(ApplicationDbContext db, IFormFileCollection formFiles)
+        public static async Task<IResult> UploadPicture(ApplicationDbContext db, IFormFileCollection formFiles, int productId)
         {
+            var product = await db.Products.FirstOrDefaultAsync(x => x.Id == productId);
+            if (product == null) { return Results.BadRequest(); }
+
             try
             {
                 var files = formFiles;
@@ -17,16 +21,26 @@ namespace BulletinBoard.Endpoints
                 {
                     return Results.BadRequest();
                 }
+                int i = 0;
                 foreach (var file in files)
                 {
                     var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
                     var fullPath = Path.Combine(pathToSave, fileName);
-                    var dbPath = Path.Combine(folderName, fileName); //you can add this path to a list and then return all dbPaths to the client if require
+                    var dbPath = Path.Combine(folderName, fileName);
+                    product.Pictures.Add(new Picture
+                    {
+                        IsPrimary = i == 0 ? true : false,
+                        PicturePath = fullPath,
+                        PublicId = dbPath
+                    });
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
+
+                    i++;
                 }
+                db.SaveChanges();
                 return Results.Ok("All the files are successfully uploaded.");
             }
             catch (Exception ex)

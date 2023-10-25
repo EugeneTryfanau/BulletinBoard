@@ -49,7 +49,7 @@
         <div class="card">
           <a routerLink="/products/product/{{product.id}}"><img src="../assets/icon24.png" alt="{{product.name}}" style="width:100%"></a>
           <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
-          <p class="title">{{product.description}}</p>
+          <p class="description">{{product.description}}</p>
           <p>{{product.price}}</p>
           <p><button class="btn-change">Изменить</button><button class="btn-delete" (click)="deleteUserProductById(product.id)">Удалить</button></p>
         </div>

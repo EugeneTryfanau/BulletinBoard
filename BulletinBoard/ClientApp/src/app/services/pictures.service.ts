@@ -13,8 +13,8 @@ export class PicturesService {
 
   constructor(private http: HttpClient) { }
 
-  uploadPicture(formData: any) {
-    this.http.post("/api/upload", formData, { reportProgress: true, observe: 'events' })
+  async uploadPicture(formData: any, productId: number) {
+    await this.http.post("/api/upload/" + productId, formData, { reportProgress: true, observe: 'events' })
       .subscribe(
         {
           next: (event) => {
@@ -26,7 +26,8 @@ export class PicturesService {
               this.onUploadFinished.emit(event.body);
             }
           },
-          error: (err: HttpErrorResponse) => console.log(err)
+          error: (err: HttpErrorResponse) => console.log(err), complete: () => window.location.href = "/"
         });
+    
   }
 }

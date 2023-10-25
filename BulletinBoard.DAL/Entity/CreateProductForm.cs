@@ -13,7 +13,5 @@
         public required double ProductPrice { get; set; }
 
         public required bool ConditionIsNew { get; set; }
-
-        public List<Picture>? Pictures { get; set; }
     }
 }

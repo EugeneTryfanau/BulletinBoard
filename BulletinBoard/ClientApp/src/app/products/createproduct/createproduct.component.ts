@@ -18,7 +18,7 @@ export class CreateproductComponent {
 
   userId: any = null;
   productName: string = "";
-  productDescription: any;
+  productDescription: any = "";
   productCategoryId: any = 1;
   productPrice: any = 0;
   conditionIsNew: any = true;
@@ -55,8 +55,8 @@ export class CreateproductComponent {
     this.userId = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
   }
 
-  create() {
-    this.prodService.createProduct({
+  async create() {
+    await this.prodService.createProduct({
       userId: this.userId,
       productName: this.productName,
       productDescription: this.productDescription,
@@ -64,6 +64,7 @@ export class CreateproductComponent {
       productPrice: this.productPrice,
       conditionIsNew: this.conditionIsNew
     });
-    this.pic.uploadPicture(this.picturesData);
+    let productId = await this.prodService.lastCreatedProductByUser(this.userId);
+    await this.pic.uploadPicture(this.picturesData, productId);
   }
 }
