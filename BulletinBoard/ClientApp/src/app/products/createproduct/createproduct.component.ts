@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
 import { CategoryService } from '../../services/category.service';
 import { firstValueFrom } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { PicturesService } from '../../services/pictures.service';
 
 @Component({
   selector: 'app-createproduct',
@@ -12,23 +13,22 @@ import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/ht
 })
 export class CreateproductComponent {
 
-  progress: number = 0;
-  message: string = "";
-  @Output() public onUploadFinished = new EventEmitter();
+  emptyString: string = "";
+  picturesData: any;
 
   userId: any = null;
-  productName: any;
+  productName: string = "";
   productDescription: any;
   productCategoryId: any = 1;
   productPrice: any = 0;
   conditionIsNew: any = true;
 
-  productFile: any;
+  productPictures: any[] = [];
 
   categories: any = [];
 
-  constructor(private http: HttpClient, private prodService: ProductService, private auth: AuthService, private categoryService: CategoryService) {
-
+  constructor(private http: HttpClient, private prodService: ProductService, private auth: AuthService,
+    private categoryService: CategoryService, public pic: PicturesService) {
   }
 
   uploadFile = (files: FileList | null) => {
@@ -38,22 +38,15 @@ export class CreateproductComponent {
     if (files.length === 0) {
       return;
     }
-    let fileToUpload = <File>files[0];
+    this.productPictures = Array.from(files);
+    let filesToUpload: File[] = Array.from(files);
     const formData = new FormData();
-    formData.append('file', fileToUpload, this.productName + "_" + this.userId + "." + fileToUpload.name.split('.')[1]);
 
-    this.http.post("/api/upload", formData, { reportProgress: true, observe: 'events' })
-      .subscribe({
-        next: (event) => {
-          if (event.type === HttpEventType.UploadProgress)
-            this.progress = Math.round(100 * event.loaded / event.total!);
-          else if (event.type === HttpEventType.Response) {
-            this.message = 'Upload success.';
-            this.onUploadFinished.emit(event.body);
-          }
-        },
-        error: (err: HttpErrorResponse) => console.log(err)
-      });
+    Array.from(filesToUpload).map((file, index) => {
+      return formData.append('file' + index, file, this.productName + "_" + this.userId + "_" + index + "." + file.name.split('.')[1]);
+    });
+
+    this.picturesData = formData;
   }
 
   async ngOnInit() {
@@ -63,7 +56,7 @@ export class CreateproductComponent {
   }
 
   create() {
-    return this.prodService.createProduct({
+    this.prodService.createProduct({
       userId: this.userId,
       productName: this.productName,
       productDescription: this.productDescription,
@@ -71,5 +64,6 @@ export class CreateproductComponent {
       productPrice: this.productPrice,
       conditionIsNew: this.conditionIsNew
     });
+    this.pic.uploadPicture(this.picturesData);
   }
 }
