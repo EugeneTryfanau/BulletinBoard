@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { AuthService } from '../../services/auth.service';
 import { CategoryService } from '../../services/category.service';
 import { firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-createproduct',
@@ -11,6 +11,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./createproduct.component.css']
 })
 export class CreateproductComponent {
+
+  progress: number = 0;
+  message: string = "";
+  @Output() public onUploadFinished = new EventEmitter();
 
   userId: any = null;
   productName: any;
@@ -23,6 +27,31 @@ export class CreateproductComponent {
 
   constructor(private http: HttpClient, private prodService: ProductService, private auth: AuthService, private categoryService: CategoryService) {
 
+  }
+
+  uploadFile = (files: FileList | null) => {
+    if (files === null) {
+      return;
+    }
+    if (files.length === 0) {
+      return;
+    }
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+
+    this.http.post("/api/upload", formData, { reportProgress: true, observe: 'events' })
+      .subscribe({
+        next: (event) => {
+          if (event.type === HttpEventType.UploadProgress)
+            this.progress = Math.round(event.loaded);
+          else if (event.type === HttpEventType.Response) {
+            this.message = 'Upload success.';
+            this.onUploadFinished.emit(event.body);
+          }
+        },
+        error: (err: HttpErrorResponse) => console.log(err)
+      });
   }
 
   async ngOnInit() {

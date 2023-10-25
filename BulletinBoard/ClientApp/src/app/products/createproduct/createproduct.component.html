@@ -31,8 +31,21 @@
       </select>
     </p>
 
-    <img id="blah" src="" alt="your image" /><br />
-    <input type="file" name="AddImage" id="AddImage" accept="image/*" />
+    <div class="row" style="margin-bottom:15px;">
+      <h2>As read:</h2>
+      <div class="col-md-3">
+        <input type="file" #file placeholder="Выбрать" (change)="uploadFile(file.files)" style="display:none;" multiple>
+        <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+      </div>
+      <div class="col-md-4">
+        <span class="upload" *ngIf="progress > 0">
+          {{progress}}%
+        </span>
+        <span class="upload" *ngIf="message">
+          {{message}}
+        </span>
+      </div>
+    </div>
 
     <button type="submit" class="createbtn" (click)="create()">Разместить</button>
   </form>

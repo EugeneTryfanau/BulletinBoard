@@ -66,5 +66,6 @@ apiEndpoints.MapGet("/products/pages/{category}", ProductEndpoints.GetProductsPa
 apiEndpoints.MapGet("/products/pages/{category}/{page}", ProductEndpoints.GetProductsPage);
 apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
 apiEndpoints.MapGet("/products/product/{productId}", ProductEndpoints.GetProductById);
+apiEndpoints.MapPost("/upload", PictureEndpoints.UploadPicture);
 
 app.Run();
