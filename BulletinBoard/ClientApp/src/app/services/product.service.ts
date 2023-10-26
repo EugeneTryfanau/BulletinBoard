@@ -19,8 +19,8 @@ export class ProductService {
     return await this.http.post<any>("/api/products/create", createForm, { withCredentials: true });
   }
 
-  async lastCreatedProductByUser(userId: string) {
-    return await firstValueFrom(this.http.get<any>("/api/products/product/last/" + userId));
+  lastCreatedProductByUser(userId: string) {
+    return firstValueFrom(this.http.get<any>("/api/products/product/last/" + userId));
   }
 
   async getProductInfo(productId: number) {

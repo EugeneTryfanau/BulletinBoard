@@ -11,7 +11,5 @@ namespace BulletinBoard.DAL.Entity
         public DateTime BirthDate { get; set; }
 
         public List<Product> Products { get; set; } = new();
-
-        public IdentityRole? Role { get; set; }
     }
 }

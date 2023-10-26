@@ -31,7 +31,8 @@ namespace BulletinBoard.Endpoints
                     {
                         IsPrimary = i == 0 ? true : false,
                         PicturePath = fullPath,
-                        PublicId = dbPath
+                        PublicId = dbPath,
+                        ProductId = product.Id
                     });
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {

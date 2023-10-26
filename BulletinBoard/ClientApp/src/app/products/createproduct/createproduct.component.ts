@@ -55,16 +55,21 @@ export class CreateproductComponent {
     this.userId = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
   }
 
+  productId: any;
+  created: boolean = false;
+
   async create() {
-    await this.prodService.createProduct({
+    (await this.prodService.createProduct({
       userId: this.userId,
       productName: this.productName,
       productDescription: this.productDescription,
       productCategoryId: this.productCategoryId,
       productPrice: this.productPrice,
-      conditionIsNew: this.conditionIsNew
-    });
-    let productId = await this.prodService.lastCreatedProductByUser(this.userId);
-    await this.pic.uploadPicture(this.picturesData, productId);
+      conditionIsNew: this.conditionIsNew == "false" ? false : true
+    })).subscribe(async x => {
+      this.productId = await this.prodService.lastCreatedProductByUser(this.userId);
+      this.pic.uploadPicture(this.picturesData, this.productId);
+    })
+      
   }
 }

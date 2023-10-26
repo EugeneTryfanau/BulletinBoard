@@ -73,9 +73,6 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -95,8 +92,6 @@ namespace BulletinBoard.DAL.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -433,13 +428,13 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "9129c045-a187-4ec6-bd14-5b41838df186",
+                            Id = "f73effa6-4027-4dd0-8dff-fc62c7bfb11d",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "429054b8-567f-4deb-9d1d-bc995d5a4dca",
+                            Id = "35f1b7e9-a888-4513-bb86-4590744c4ebc",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -551,24 +546,13 @@ namespace BulletinBoard.DAL.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BulletinBoard.DAL.Entity.ApplicationUser", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Picture", b =>
                 {
-                    b.HasOne("BulletinBoard.DAL.Entity.Product", "Product")
+                    b.HasOne("BulletinBoard.DAL.Entity.Product", null)
                         .WithMany("Pictures")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BulletinBoard.DAL.Entity.Product", b =>
