@@ -2,7 +2,7 @@
   <h2 class="col">{{product?.name}}</h2>
   <ul class="list-group">
     <li class="list-group-item">
-      <img src="../assets/icon24.png" class="mx-auto d-block" width="300" height="300">
+      <img src="{{product?.pictures[0].publicId}}" class="mx-auto d-block" width="300" height="300">
     </li>
     <li class="list-group-item">
       <strong>Дата создания объявления: </strong>{{product?.creationDate}}

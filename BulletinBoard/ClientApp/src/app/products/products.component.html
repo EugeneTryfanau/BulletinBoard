@@ -7,7 +7,7 @@
   <div class="row" *ngFor="let columns of productsOnPage">
     <div class="column" *ngFor="let product of columns">
       <div class="card">
-        <a routerLink="/products/product/{{product.id}}"><img src="../assets/icon24.png" alt="John" style="width:100%"></a>
+        <a routerLink="/products/product/{{product.id}}"><img src="{{product.pictures[0].publicId}}" alt="John" style="width:100%"></a>
         <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
         <p class="description">{{product.description}}</p>
         <p>{{product.price}}</p>
