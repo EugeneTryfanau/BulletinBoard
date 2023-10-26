@@ -2,6 +2,10 @@
   font-family: Inter,Roboto,sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .description {
   width: 100%;
   height: 40px;

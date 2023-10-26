@@ -1,40 +1,72 @@
 .topnav {
+  height: 45px;
   overflow: hidden;
-  top: 0;
-  position: fixed;
-  width: 99%;
-  margin-bottom:50px;
   background-color: #f2f2f2;
   border-radius: 15px;
+  margin-bottom: 10px;
 }
 
-  .topnav .mainNavPart a {
+  .topnav .icon {
+    height: 20px;
+  }
+
+  .topnav .search {
+    width: 215px;
+    max-width: 100%;
+  }
+
+  .topnav a, .topnav .search-container {
     float: left;
     display: block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 27px;
+    font-size: 16px;
     color: black;
   }
 
-    .topnav .mainNavPart a:hover {
+    .topnav a:hover {
       background-color: #d3f8ba;
       color: black;
     }
 
-
-  .topnav .signPart a {
+  .topnav .header-right {
     float: right;
-    display: block;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 27px;
-    color: black;
   }
 
-    .topnav .signPart a:hover {
-      background-color: #d3f8ba;
-      color: black;
+  .topnav .search-container {
+    padding: 3px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+  }
+
+  .topnav .search-container button:hover {
+    background: #ccc;
+  }
+
+  @media screen and (max-width: 970px) {
+    .topnav {
+        height:auto;
     }
+    .topnav .search-container {
+    float: none;
+    }
+
+    .topnav a, .topnav .search, .topnav .search-container button {
+      float: none;
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 0;
+      padding: 14px;
+    }
+
+        .topnav .header-right {
+            display: none;
+        }
+
+        .topnav .search {
+          border: 1px solid #ccc;
+        }
+  }
