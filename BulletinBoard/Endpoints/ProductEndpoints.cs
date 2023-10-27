@@ -25,20 +25,20 @@ namespace BulletinBoard.Endpoints
 
         }
 
-        public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0)
+        public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0, int pagesize = 8)
         {
             if (category == 0)
             {
                 var products = await db.Products.CountAsync();
-                if (products < 8) return 1;
+                if (products < pagesize) return 1;
 
-                if (products % 8 == 0)
+                if (products % pagesize == 0)
                 {
-                    products /= 8;
+                    products /= pagesize;
                 }
                 else
                 {
-                    products = products / 8 + 1;
+                    products = products / pagesize + 1;
                 }
 
                 return products;
@@ -46,15 +46,15 @@ namespace BulletinBoard.Endpoints
             else
             {
                 var products = await db.Products.Where<Product>(x => x.CategoryId == category).CountAsync();
-                if (products < 8) return 1;
+                if (products < pagesize) return 1;
 
-                if (products % 8 == 0)
+                if (products % pagesize == 0)
                 {
-                    products /= 8;
+                    products /= pagesize;
                 }
                 else
                 {
-                    products = products / 8 + 1;
+                    products = products / pagesize + 1;
                 }
 
                 return products;

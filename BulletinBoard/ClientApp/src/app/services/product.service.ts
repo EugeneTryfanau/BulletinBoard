@@ -10,6 +10,7 @@ export class ProductService {
   currentPage: number = 1;
   pages: number = 0;
   currentCategory: number = 0;
+  currentPagesize: number = 8;
 
   newlyCreateId: number = -1;
 
@@ -29,17 +30,18 @@ export class ProductService {
     );
   }
 
-  async getTotalCountOfPages(category: number = 0) {
+  async getTotalCountOfPages(category: number = 0, pagesize: number = 10) {
     this.pages = await firstValueFrom(
-      this.http.get<any>("/api/products/pages/" + category));
+      this.http.get<any>("/api/products/pages/" + category + "/" + pagesize));
     return this.pages;
   }
 
-  async getProductsOnPage(page: number = 1, category: number = 0) {
+  async getProductsOnPage(page: number = 1, category: number = 0, pagesize: number = 10) {
     this.currentPage = page;
     this.currentCategory = category;
+    this.currentPagesize = pagesize;
     this.products = await firstValueFrom(
-      this.http.get<any>("/api/products/pages/" + category + "/" + page));
+      this.http.get<any>("/api/products/pages/" + category + "/" + pagesize + "/" + page));
     return this.products;
   }
 

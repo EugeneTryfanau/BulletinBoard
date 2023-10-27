@@ -1,16 +1,15 @@
 <div class="topnav" id="tryfTopNav">
-    <a href=""><img src="/assets/icon24.png" class="icon" /></a>
-    <a routerLink="">Главная</a>
-    <a routerLink="/users" *ngIf="isAdmin">Пользователи</a>
-    <div class="search-container">
-      <input type="text" class="search" placeholder="Поиск.." name="search">
-      <button type="submit">Поиск</button>
-    </div>
-    <div class="header-right">
-      <a routerLink="/create-product" *ngIf="visibility">Разместить объявление</a>
-      <a routerLink="/register" *ngIf="!visibility">Регистрация</a>
-      <a routerLink="/login" *ngIf="!visibility">Вход</a>
-      <a routerLink="/user-profile" *ngIf="visibility">{{userName}}</a>
-      <a routerLink="/" *ngIf="visibility" (click)="logout()">Выход</a>
-    </div>
+  <a routerLink=""><img src="/assets/icon24.png" class="icon" /></a>
+  <a routerLink="/users" *ngIf="isAdmin">Пользователи</a>
+  <a routerLink="/create-product" *ngIf="visibility">Разместить объявление</a>
+  <div class="search-container">
+    <input type="text" class="search" placeholder="Поиск.." name="search">
+    <button type="submit">Поиск</button>
+  </div>
+  <div class="header-right">
+    <a routerLink="/register" *ngIf="!visibility">Регистрация</a>
+    <a routerLink="/login" *ngIf="!visibility">Вход</a>
+    <a routerLink="/user-profile" *ngIf="visibility">{{userName}}</a>
+    <a routerLink="/" *ngIf="visibility" (click)="logout()">Выход</a>
+  </div>
 </div>

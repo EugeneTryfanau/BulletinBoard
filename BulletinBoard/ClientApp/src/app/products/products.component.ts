@@ -17,6 +17,8 @@ export class ProductsComponent {
   paginationArray: any = [];
   productsOnPage: any = [];
 
+  sizeInRow: number = 5;
+
   isCurrent: string = "active";
   notCurrent: string = "notcurrent";
 
@@ -30,9 +32,8 @@ export class ProductsComponent {
     }
 
     var prodarray = await this.prod.getProductsOnPage();
-    let sizeInRow = 4;
-    for (let i = 0; i < Math.ceil(prodarray.length / sizeInRow); i++) {
-      this.productsOnPage[i] = prodarray.slice((i * sizeInRow), (i * sizeInRow) + sizeInRow);
+    for (let i = 0; i < Math.ceil(prodarray.length / this.sizeInRow); i++) {
+      this.productsOnPage[i] = prodarray.slice((i * this.sizeInRow), (i * this.sizeInRow) + this.sizeInRow);
     }
     console.log(this.productsOnPage);
   }
@@ -50,10 +51,9 @@ export class ProductsComponent {
     }
 
     var prodarray = await this.prod.getProductsOnPage(page, category);
-    let sizeInRow = 4;
     this.productsOnPage = [];
-    for (let i = 0; i < Math.ceil(prodarray.length / sizeInRow); i++) {
-      this.productsOnPage[i] = prodarray.slice((i * sizeInRow), (i * sizeInRow) + sizeInRow);
+    for (let i = 0; i < Math.ceil(prodarray.length / this.sizeInRow); i++) {
+      this.productsOnPage[i] = prodarray.slice((i * this.sizeInRow), (i * this.sizeInRow) + this.sizeInRow);
     }
     console.log(this.productsOnPage);
   }
