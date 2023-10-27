@@ -25,5 +25,4 @@ export class CategoriesComponent {
     this.products.pageTitle = this.categories[id - 1].categoryName;
     console.log(id);
   }
-
 }

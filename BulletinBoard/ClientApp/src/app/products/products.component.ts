@@ -30,9 +30,9 @@ export class ProductsComponent {
     }
 
     var prodarray = await this.prod.getProductsOnPage();
-    let size = 5;
-    for (let i = 0; i < Math.ceil(prodarray.length / size); i++) {
-      this.productsOnPage[i] = prodarray.slice((i * size), (i * size) + size);
+    let sizeInRow = 4;
+    for (let i = 0; i < Math.ceil(prodarray.length / sizeInRow); i++) {
+      this.productsOnPage[i] = prodarray.slice((i * sizeInRow), (i * sizeInRow) + sizeInRow);
     }
     console.log(this.productsOnPage);
   }
@@ -50,11 +50,12 @@ export class ProductsComponent {
     }
 
     var prodarray = await this.prod.getProductsOnPage(page, category);
-    let size = 5;
+    let sizeInRow = 4;
     this.productsOnPage = [];
-    for (let i = 0; i < Math.ceil(prodarray.length / size); i++) {
-      this.productsOnPage[i] = prodarray.slice((i * size), (i * size) + size);
+    for (let i = 0; i < Math.ceil(prodarray.length / sizeInRow); i++) {
+      this.productsOnPage[i] = prodarray.slice((i * sizeInRow), (i * sizeInRow) + sizeInRow);
     }
+    console.log(this.productsOnPage);
   }
 
 }

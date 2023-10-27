@@ -1,7 +1,9 @@
-<div class="sidenav-conteiner">
-  <h3>Категории</h3>
-  <div class="sidenav" *ngFor="let category of categories">
-    <div class="categoryLink" (click)="filterOnCategory(category.id)">{{category.categoryName}}</div>
+<div class="navbar">
+  <div class="dropdown">
+    <a class="dropbtn" routerLink="">Категории<i class="fa fa-caret-down"></i></a>
+    <p></p>
+    <div class="dropdown-content">
+      <a class="categoryLink" *ngFor="let category of categories" (click)="filterOnCategory(category.id)">{{category.categoryName}}<br /></a>
+    </div>
   </div>
 </div>
-
