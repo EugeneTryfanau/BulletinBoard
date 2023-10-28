@@ -15,7 +15,7 @@ export class AuthService {
 
   async loadUser() {
     const user = await firstValueFrom(
-      this.http.get<any>("/api/user")
+      this.http.get<any>("/api/users")
     )
     if ('userId' in user) {
       this.user = user
@@ -24,11 +24,11 @@ export class AuthService {
   }
 
   async getUserProfile(userId: any) {
-    return await firstValueFrom(this.http.get<any>("/api/user-profile/" + userId));
+    return await firstValueFrom(this.http.get<any>("/api/users/" + userId));
   }
 
   async changePassword(passModel: ChangePassword) {
-    return this.http.post("/api/user-profile/change-password", passModel);
+    return this.http.put("/api/users/change-password", passModel);
   }
 
   login(loginForm: any) {
@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   deleteAccount(userId: string) {
-    return this.http.get("/api/delete-account/" + userId)
+    return this.http.delete("/api/users/" + userId)
       .subscribe(_ => {
         this.user = null;
         window.location.href = "/";

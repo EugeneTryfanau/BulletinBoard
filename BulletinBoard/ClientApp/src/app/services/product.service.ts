@@ -17,16 +17,16 @@ export class ProductService {
   constructor(private http: HttpClient) { }
   
   async createProduct(createForm: any) {
-    return await this.http.post<any>("/api/products/create", createForm, { withCredentials: true });
+    return await this.http.post<any>("/api/products", createForm, { withCredentials: true });
   }
 
   lastCreatedProductByUser(userId: string) {
-    return firstValueFrom(this.http.get<any>("/api/products/product/last/" + userId));
+    return firstValueFrom(this.http.get<any>("/api/products/last/" + userId));
   }
 
   async getProductInfo(productId: number) {
     return await firstValueFrom(
-      this.http.get<any>("/api/products/product/" + productId)
+      this.http.get<any>("/api/products/" + productId)
     );
   }
 
@@ -54,11 +54,11 @@ export class ProductService {
   }
 
   async getUsersProducts(userId: string) {
-    return await firstValueFrom(this.http.get<any>("/api/user-profile/products/" + userId));
+    return await firstValueFrom(this.http.get<any>("/api/users/products/" + userId));
   }
 
   async deleteUserProductById(productId: number) {
-    return this.http.get("/api/delete-product/" + productId)
+    return this.http.delete("/api/products/" + productId)
       .subscribe(_ => {
         window.location.reload();
       });

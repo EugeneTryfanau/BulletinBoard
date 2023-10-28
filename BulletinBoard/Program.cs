@@ -49,27 +49,37 @@ var app = builder.BuildWithSPA();
 
 var apiEndpoints = app.MapGroup("/api");
 
+//user
+//TODO change pathes to unificate them
+apiEndpoints.MapGet("/users", UserEndpoints.Handler);
+apiEndpoints.MapGet("/users/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
+apiEndpoints.MapGet("/users/products/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
+apiEndpoints.MapPut("/users/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
+apiEndpoints.MapDelete("/users/{userId}", UserEndpoints.DeleteAccount).RequireAuthorization();
 
-apiEndpoints.MapGet("/user", UserEndpoints.Handler);
+//auth
 apiEndpoints.MapPost("/login", LoginEndpoint.Handler);
 apiEndpoints.MapPost("/register", RegisterEndpoint.Handler);
 apiEndpoints.MapGet("/logout", LogoutEndpoint.Handler).RequireAuthorization();
-apiEndpoints.MapGet("/user-profile/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
-apiEndpoints.MapPost("/user-profile/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
-apiEndpoints.MapGet("/delete-account/{userId}", UserEndpoints.DeleteAccount).RequireAuthorization();
-apiEndpoints.MapGet("/user-profile/products/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
-apiEndpoints.MapGet("/delete-product/{productId}", ProductEndpoints.DeleteProductById).RequireAuthorization();
 
+//admin
+apiEndpoints.MapGet("/admin/users", UserEndpoints.GetUsers).RequireAuthorization("admin");
+apiEndpoints.MapPost("/admin/users/{userId}", UserEndpoints.UserPromotion).RequireAuthorization("admin");
+
+//categories
 apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 
-apiEndpoints.MapGet("/users", UserEndpoints.GetUsers).RequireAuthorization("admin");
-apiEndpoints.MapPost("/users/{userId}", UserEndpoints.UserPromotion).RequireAuthorization("admin");
+//products
+apiEndpoints.MapGet("/products/{productId}", ProductEndpoints.GetProductById);
+apiEndpoints.MapGet("/products/last/{userId}", ProductEndpoints.GetLastCreatedProductByUserId).RequireAuthorization();
+apiEndpoints.MapPost("/products", ProductEndpoints.CreateProduct).RequireAuthorization();
+apiEndpoints.MapDelete("/products/{productId}", ProductEndpoints.DeleteProductById).RequireAuthorization();
 
+//products filter
 apiEndpoints.MapGet("/products/pages/{category}/{pagesize}", ProductEndpoints.GetProductsPageCount);
 apiEndpoints.MapGet("/products/pages/{category}/{pagesize}/{page}", ProductEndpoints.GetProductsPage);
-apiEndpoints.MapPost("/products/create", ProductEndpoints.CreateProduct).RequireAuthorization();
-apiEndpoints.MapGet("/products/product/{productId}", ProductEndpoints.GetProductById);
-apiEndpoints.MapGet("/products/product/last/{userId}", ProductEndpoints.GetLastCreatedProductByUserId).RequireAuthorization();
-apiEndpoints.MapPost("/upload/{productId}", PictureEndpoints.UploadPicture).RequireAuthorization();
+
+//pictures
+apiEndpoints.MapPost("/pictures/{productId}", PictureEndpoints.UploadPicture).RequireAuthorization();
 
 app.Run();

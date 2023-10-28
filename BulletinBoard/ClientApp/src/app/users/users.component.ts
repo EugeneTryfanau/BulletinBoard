@@ -18,12 +18,12 @@ export class UsersComponent {
 
   async ngOnInit() {
     this.users = await firstValueFrom(
-      this.http.get('/api/users')
+      this.http.get('/api/admin/users')
     )
   }
 
   promotion(userId: string) {
-    return this.http.post<any>("/api/users/" + userId, { withCredentials: true })
+    return this.http.post<any>("/api/admin/users/" + userId, { withCredentials: true })
       .subscribe(_ => {
         this.users.filter((user: { id: string; }) => user.id != userId);
       })

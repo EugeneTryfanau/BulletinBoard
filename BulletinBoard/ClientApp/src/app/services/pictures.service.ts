@@ -14,7 +14,7 @@ export class PicturesService {
   constructor(private http: HttpClient) { }
 
   async uploadPicture(formData: any, productId: number) {
-    await this.http.post("/api/upload/" + productId, formData, { reportProgress: true, observe: 'events' })
+    await this.http.post("/api/pictures/" + productId, formData, { reportProgress: true, observe: 'events' })
       .subscribe(
         {
           next: (event) => {
