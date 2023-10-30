@@ -1,9 +1,24 @@
 <div class="product-info-conteiner">
   <h2 class="col">{{product?.name}}</h2>
+  
+  <div class="slideshow-container">
+    
+    <div>
+      <img src="{{product?.pictures[0].publicId}}" class="myFirstSlides fade" *ngIf="!slideChanged" style="width: 100%; height: 500px">
+      <img *ngFor="let pic of pictures" src="{{pic.publicId}}" class="mySlides fade" style="width: 100%; height: 500px">
+    </div>
+
+
+    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot" *ngFor="let index of picIndexes" (click)="currentSlide(index)"></span>
+  </div>
+
   <ul class="list-group">
-    <li class="list-group-item">
-      <img src="{{product?.pictures[0].publicId}}" class="mx-auto d-block" width="300" height="300">
-    </li>
     <li class="list-group-item">
       <strong>Дата создания объявления: </strong>{{product?.creationDate}}
     </li>
