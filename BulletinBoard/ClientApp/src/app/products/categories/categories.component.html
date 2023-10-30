@@ -1,6 +1,6 @@
 <div class="navbar">
   <div class="dropdown">
-    <a class="dropbtn" routerLink="">Категории<i class="fa fa-caret-down"></i></a>
+    <a class="dropbtn" href="">Категории (Все)<i class="fa fa-caret-down"></i></a>
     <p></p>
     <div class="dropdown-content">
       <a class="categoryLink" *ngFor="let category of categories" (click)="filterOnCategory(category.id)">{{category.categoryName}}<br /></a>
