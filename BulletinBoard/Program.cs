@@ -54,6 +54,7 @@ var apiEndpoints = app.MapGroup("/api");
 apiEndpoints.MapGet("/users", UserEndpoints.Handler);
 apiEndpoints.MapGet("/users/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
 apiEndpoints.MapGet("/users/products/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
+apiEndpoints.MapPatch("/users/change-user-info", UserEndpoints.ChangeUserInfo).RequireAuthorization();
 apiEndpoints.MapPut("/users/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
 apiEndpoints.MapDelete("/users/{userId}", UserEndpoints.DeleteAccount).RequireAuthorization();
 

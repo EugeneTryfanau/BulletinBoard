@@ -1,3 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+.user-card {
+  margin: auto;
+  max-width: 600px;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
+.list-group-item {
+  width: 100%;
+  padding: 15px;
+  list-style-type: none;
+}
+
+.btn-change-info {
+    border: 2px solid #6e87ff;
+    padding: 10px;
+    background-color: #6eb4ff;
+}
+
 .products-conteiner {
   margin: auto;
   width: 99%;

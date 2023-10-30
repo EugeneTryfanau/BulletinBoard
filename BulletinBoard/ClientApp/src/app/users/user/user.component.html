@@ -2,24 +2,26 @@
   <h1>Мой кабинет</h1>
   <ul class="list-group">
     <li class="list-group-item">
-      <strong>Имя пользователя: </strong>{{userDetails.userName}}
+      <strong>Имя пользователя: </strong><input type="text" placeholder="{{userDetails.userName}}" name="userName" id="userName">
     </li>
     <li class="list-group-item">
-      <strong>Город: </strong>{{userDetails.city}}
+      <strong>Город: </strong><input type="text" placeholder="{{userDetails.city}}" name="city" id="city">
     </li>
     <li class="list-group-item">
-      <strong>Email: </strong>{{userDetails.email}}
+      <strong>Email: </strong><input type="text" placeholder="{{userDetails.email}}" name="email" id="email">
     </li>
     <li class="list-group-item">
-      <strong>Пол: </strong>{{userDetails.gender}}
+      <strong>Пол: </strong><input type="text" placeholder="{{userDetails.gender}}" name="gender" id="gender">
     </li>
     <li class="list-group-item">
-      <strong>Номер телефона: </strong>{{userDetails.phoneNumber}}
+      <strong>Номер телефона: </strong>+375 <input type="text" placeholder="{{userDetails.phoneNumber}}" name="phoneNumber" id="phoneNumber">
     </li>
     <li class="list-group-item">
-      <strong>Дата рождения: </strong>{{userDetails.birthDate}}
+      <strong>Дата рождения: </strong><input type="text" placeholder="{{userDetails.birthDate}}" name="birthDate" id="birthDate">
     </li>
-    <li>
+    <a routerLink="" class="btn-change-info" >Сохранить изменения</a>
+
+    <li *ngIf="userDetails.userName != 'admin'">
       <br>
       <form #form="ngForm" autocomplete="off" (submit)="changePassword(form)">
         <div class="form-group">
@@ -39,20 +41,20 @@
       <a routerLink="/" class="btn-delete" *ngIf="userDetails.userName != 'admin'" (click)="deleteAccount(userDetails.id)">Удалить аккаунт</a>
     </li>
   </ul>
+</div>
 
-  <br />
+<br />
 
-  <div class="products-conteiner">
-    <h2>Ваши объявления</h2>
-    <div class="row" *ngFor="let columns of productsInGroups">
-      <div class="column" *ngFor="let product of columns">
-        <div class="card">
-          <a routerLink="/products/product/{{product.id}}"><img src="{{product.pictures[0].publicId}}" alt="{{product.name}}" style="width:100%"></a>
-          <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
-          <p class="description">{{product.description}}</p>
-          <p>{{product.price}}</p>
-          <p><button class="btn-change">Изменить</button><button class="btn-delete" (click)="deleteUserProductById(product.id)">Удалить</button></p>
-        </div>
+<div class="products-conteiner">
+  <h2>Ваши объявления</h2>
+  <div class="row" *ngFor="let columns of productsInGroups">
+    <div class="column" *ngFor="let product of columns">
+      <div class="card">
+        <a routerLink="/products/product/{{product.id}}"><img src="{{product.pictures[0].publicId}}" alt="{{product.name}}" style="width:100%"></a>
+        <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
+        <p class="description">{{product.description}}</p>
+        <p>{{product.price}}</p>
+        <p><button class="btn-change">Изменить</button><button class="btn-delete" (click)="deleteUserProductById(product.id)">Удалить</button></p>
       </div>
     </div>
   </div>

@@ -4,6 +4,7 @@ using Duende.IdentityServer.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BulletinBoard.Endpoints
 {
@@ -24,6 +25,40 @@ namespace BulletinBoard.Endpoints
             var userInfo = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             return userInfo;
+        }
+
+        public static async Task<IResult> ChangeUserInfo(UserManager<ApplicationUser> userManager,  ApplicationUserInfo user)
+        {
+            if (user == null || user.Id == null)
+            {
+                return Results.BadRequest(new { message = "Нет информации о пользователе." });
+            }
+
+            var userToChange = await userManager.FindByIdAsync(user.Id);
+            if (userToChange != null)
+            {
+                userToChange.UserName = user.UserName != null && user.UserName != "" && userToChange.UserName != "admin" ? user.UserName : userToChange.UserName;
+                userToChange.City = user.City != null && user.City != "" ? user.City : userToChange.City;
+                userToChange.Email = user.Email != null && user.Email != "" ? user.Email : userToChange.Email;
+                userToChange.Gender = user.Gender != null && user.Gender != "" ? user.Gender : userToChange.Gender;
+                userToChange.PhoneNumber = user.PhoneNumber != null && user.PhoneNumber != "" ? user.PhoneNumber : userToChange.PhoneNumber;
+                userToChange.BirthDate = user.BirthDate != null && user.BirthDate != "" ? Convert.ToDateTime(user.BirthDate) : userToChange.BirthDate;
+
+                var result = await userManager.UpdateAsync(userToChange);
+
+                if (result.Succeeded)
+                {
+                    return Results.Ok(result.Succeeded);
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        return Results.BadRequest(new { message = error.Description });
+                    }
+                }
+            }
+            return Results.BadRequest(new { message = "Нет информации о пользователе." });
         }
 
         public static async Task<IResult> ChangePassword(UserManager<ApplicationUser> userManager, ChangePasswordModel model)
