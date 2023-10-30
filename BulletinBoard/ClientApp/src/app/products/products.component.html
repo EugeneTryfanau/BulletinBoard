@@ -15,9 +15,9 @@
     </div>
   </div>
 
-  <div class="pagination">
-    <a routerLink="">&lsaquo;</a>
+  <div class="pagination" *ngIf="totalPages > 1">
+    <a *ngIf="currentPage != 1" (click)="toPage(currentPage-1)">&lsaquo;</a>
     <a *ngFor="let page of paginationArray" [class]="currentPage == page ? isCurrent : notCurrent" (click)="toPage(page)">{{page}}</a>
-    <a routerLink="">&rsaquo;</a>
+    <a *ngIf="currentPage != totalPages" (click)="toPage(currentPage+1)">&rsaquo;</a>
   </div>
 </div>
