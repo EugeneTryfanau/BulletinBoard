@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ChangePassword } from '../../services/models/changepassword';
 import { ProductService } from '../../services/product.service';
+import { ApplicationUserInfo } from '../../services/models/applicationuserinfo';
 
 @Component({
   selector: 'app-user',
@@ -17,6 +18,8 @@ export class UserComponent {
   userProducts: any;
   productsInGroups: any = [];
 
+  userInfo: ApplicationUserInfo = new ApplicationUserInfo();
+
   passModel: ChangePassword = new ChangePassword;
 
   constructor(private router: Router, private auth: AuthService, private prod: ProductService) { }
@@ -24,7 +27,7 @@ export class UserComponent {
   async ngOnInit() {
     const user = await this.auth.loadUser();
     this.userId = user['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-    console.log(this.userId);
+    this.userInfo.id = this.userId;
     this.userDetails = await this.auth.getUserProfile(this.userId);
     console.log(this.userDetails);
     this.resetForm();
@@ -56,6 +59,18 @@ export class UserComponent {
         console.log(err);
       }
     );
+  }
+
+  async sendChangedInfo() {
+    (await this.auth.changeUserInfo(this.userInfo))
+      .subscribe(
+        res => {
+          location.reload();
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   async deleteAccount(userId: string) {

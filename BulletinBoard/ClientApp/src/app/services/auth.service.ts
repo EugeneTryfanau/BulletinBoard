@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { ChangePassword } from './models/changepassword';
+import { ApplicationUserInfo } from './models/applicationuserinfo';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,11 @@ export class AuthService {
   }
 
   async changePassword(passModel: ChangePassword) {
-    return this.http.put("/api/users/change-password", passModel);
+    return await this.http.put("/api/users/change-password", passModel);
+  }
+
+  async changeUserInfo(userInfoModel: ApplicationUserInfo) {
+    return await this.http.patch("/api/users/change-user-info", userInfoModel);
   }
 
   login(loginForm: any) {

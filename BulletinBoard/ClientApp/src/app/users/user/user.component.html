@@ -2,24 +2,24 @@
   <h1>Мой кабинет</h1>
   <ul class="list-group">
     <li class="list-group-item">
-      <strong>Имя пользователя: </strong><input type="text" placeholder="{{userDetails.userName}}" name="userName" id="userName">
+      <strong>Имя пользователя: </strong><input type="text" [(ngModel)]="userInfo.userName" placeholder="{{userDetails.userName}}" name="userName" id="userName" required>
     </li>
     <li class="list-group-item">
-      <strong>Город: </strong><input type="text" placeholder="{{userDetails.city}}" name="city" id="city">
+      <strong>Город: </strong><input type="text" [(ngModel)]="userInfo.city" placeholder="{{userDetails.city}}" name="city" id="city" required>
     </li>
     <li class="list-group-item">
-      <strong>Email: </strong><input type="text" placeholder="{{userDetails.email}}" name="email" id="email">
+      <strong>Email: </strong><input type="text" [(ngModel)]="userInfo.email" placeholder="{{userDetails.email}}" name="email" id="email" required>
     </li>
     <li class="list-group-item">
-      <strong>Пол: </strong><input type="text" placeholder="{{userDetails.gender}}" name="gender" id="gender">
+      <strong>Пол: </strong><input type="text" [(ngModel)]="userInfo.gender" placeholder="{{userDetails.gender}}" name="gender" id="gender" required>
     </li>
     <li class="list-group-item">
-      <strong>Номер телефона: </strong>+375 <input type="text" placeholder="{{userDetails.phoneNumber}}" name="phoneNumber" id="phoneNumber">
+      <strong>Номер телефона: </strong>+375 <input type="text" [(ngModel)]="userInfo.phoneNumber" placeholder="{{userDetails.phoneNumber}}" name="phoneNumber" id="phoneNumber" required>
     </li>
     <li class="list-group-item">
-      <strong>Дата рождения: </strong><input type="text" placeholder="{{userDetails.birthDate}}" name="birthDate" id="birthDate">
+      <strong>Дата рождения: </strong><input type="text" [(ngModel)]="userInfo.birthDate" placeholder="{{userDetails.birthDate}}" name="birthDate" id="birthDate" required>
     </li>
-    <a routerLink="" class="btn-change-info" >Сохранить изменения</a>
+    <a class="btn-change-info" (click)="sendChangedInfo()">Сохранить изменения</a>
 
     <li *ngIf="userDetails.userName != 'admin'">
       <br>
