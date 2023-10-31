@@ -11,6 +11,7 @@ export class ProductService {
   pages: number = 0;
   currentCategory: number = 0;
   currentPagesize: number = 8;
+  currentSearch: string = "";
 
   newlyCreateId: number = -1;
 
@@ -30,18 +31,19 @@ export class ProductService {
     );
   }
 
-  async getTotalCountOfPages(category: number = 0, pagesize: number = 10) {
+  async getTotalCountOfPages(searchLine: string = "%", category: number = 0, pagesize: number = 10) {
     this.pages = await firstValueFrom(
-      this.http.get<any>("/api/products/pages/" + category + "/" + pagesize));
+      this.http.get<any>("/api/products/pages/" + searchLine + "/" + category + "/" + pagesize));
     return this.pages;
   }
 
-  async getProductsOnPage(page: number = 1, category: number = 0, pagesize: number = 10) {
+  async getProductsOnPage(searchLine: string = "%", category: number = 0, page: number = 1, pagesize: number = 10) {
     this.currentPage = page;
     this.currentCategory = category;
     this.currentPagesize = pagesize;
+    this.currentSearch = searchLine;
     this.products = await firstValueFrom(
-      this.http.get<any>("/api/products/pages/" + category + "/" + pagesize + "/" + page));
+      this.http.get<any>("/api/products/pages/" + this.currentSearch + "/" + this.currentCategory + "/" + this.currentPagesize + "/" + this.currentPage));
     return this.products;
   }
 

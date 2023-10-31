@@ -1,35 +1,37 @@
 ﻿using BulletinBoard.DAL.Data;
 using BulletinBoard.DAL.Entity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace BulletinBoard.Endpoints
 {
     public class ProductEndpoints
     {
-        public static async Task<List<Product>> GetProductsPage(ApplicationDbContext db, int page = 1, int category = 0, int pagesize = 8)
+        public static async Task<List<Product>> GetProductsPage(ApplicationDbContext db, int page = 1, int category = 0, int pagesize = 8, string searchString = "%")
         {
+            searchString = searchString != "u00" ? $"%" + searchString + $"%" : "%";
+
             if (category == 0)
             {
-                var result = await db.Products.Include(x => x.Pictures)
+                var result = await db.Products.Include(x => x.Pictures).Where(x => EF.Functions.Like(x.Name, searchString))
                     .OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
                 return result;
             }
             else
             {
-                var result = await db.Products.Include(x => x.Pictures).Where<Product>(x => x.CategoryId == category)
+                var result = await db.Products.Include(x => x.Pictures).Where<Product>(x => x.CategoryId == category).Where(x => EF.Functions.Like(x.Name, searchString))
                                 .OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
                 return result;
             }
 
         }
 
-        public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0, int pagesize = 8)
+        public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0, int pagesize = 8, string searchString = "%")
         {
+            searchString = searchString.Length > 0 ? $"%" + searchString + $"%" : "%";
+
             if (category == 0)
             {
-                var products = await db.Products.CountAsync();
+                var products = await db.Products.Where(x => EF.Functions.Like(x.Name, searchString)).CountAsync();
                 if (products < pagesize) return 1;
 
                 if (products % pagesize == 0)
@@ -45,7 +47,7 @@ namespace BulletinBoard.Endpoints
             }
             else
             {
-                var products = await db.Products.Where<Product>(x => x.CategoryId == category).CountAsync();
+                var products = await db.Products.Where(x => EF.Functions.Like(x.Name, searchString)).Where<Product>(x => x.CategoryId == category).CountAsync();
                 if (products < pagesize) return 1;
 
                 if (products % pagesize == 0)

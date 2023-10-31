@@ -77,8 +77,8 @@ apiEndpoints.MapPost("/products", ProductEndpoints.CreateProduct).RequireAuthori
 apiEndpoints.MapDelete("/products/{productId}", ProductEndpoints.DeleteProductById).RequireAuthorization();
 
 //products filter
-apiEndpoints.MapGet("/products/pages/{category}/{pagesize}", ProductEndpoints.GetProductsPageCount);
-apiEndpoints.MapGet("/products/pages/{category}/{pagesize}/{page}", ProductEndpoints.GetProductsPage);
+apiEndpoints.MapGet("/products/pages/{searchString}/{category}/{pagesize}", ProductEndpoints.GetProductsPageCount);
+apiEndpoints.MapGet("/products/pages/{searchString}/{category}/{pagesize}/{page}", ProductEndpoints.GetProductsPage);
 
 //pictures
 apiEndpoints.MapPost("/pictures/{productId}", PictureEndpoints.UploadPicture).RequireAuthorization();

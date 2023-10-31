@@ -17,6 +17,7 @@ import { CategoryService } from './services/category.service';
 import { ProductService } from './services/product.service';
 import { ProductComponent } from './products/product/product.component';
 import { UserComponent } from './users/user/user.component';
+import { EditproductComponent } from './products/editproduct/editproduct.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { UserComponent } from './users/user/user.component';
     CategoriesComponent,
     CreateproductComponent,
     ProductComponent,
-    UserComponent
+    UserComponent,
+    ProductsComponent,
+    EditproductComponent
   ],
   imports: [
     BrowserModule,

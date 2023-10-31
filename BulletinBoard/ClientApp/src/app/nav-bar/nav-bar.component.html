@@ -2,10 +2,6 @@
   <a routerLink=""><img src="/assets/icon24.png" class="icon" /></a>
   <a routerLink="/users" *ngIf="isAdmin">Пользователи</a>
   <a routerLink="/create-product" *ngIf="visibility">Разместить объявление</a>
-  <div class="search-container">
-    <input type="text" class="search" placeholder="Поиск.." name="search">
-    <button type="submit">Поиск</button>
-  </div>
   <div class="header-right">
     <a routerLink="/register" *ngIf="!visibility">Регистрация</a>
     <a routerLink="/login" *ngIf="!visibility">Вход</a>

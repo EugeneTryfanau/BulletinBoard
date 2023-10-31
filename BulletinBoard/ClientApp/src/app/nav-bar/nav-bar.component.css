@@ -10,12 +10,7 @@
     height: 18px;
   }
 
-  .topnav .search {
-    width: 215px;
-    max-width: 100%;
-  }
-
-  .topnav a, .topnav .search-container {
+  .topnav a{
     float: left;
     display: block;
     text-align: center;
@@ -34,18 +29,7 @@
     float: right;
   }
 
-  .topnav .search-container {
-    padding: 3px;
-    margin-top: 8px;
-    font-size: 17px;
-    border: none;
-  }
-
-  .topnav .search-container button:hover {
-    background: #ccc;
-  }
-
-  @media screen and (max-width: 970px) {
+  @media screen and (max-width: 650px) {
     .topnav {
       height:auto;
     }
@@ -61,17 +45,7 @@
       padding: 14px;
     }
 
-        .topnav .header-right {
-            display: none;
-        }
-
-        .topnav .search {
-          border: 1px solid #ccc;
-        }
-
-      .topnav .search-container button {
-        border: 1px solid #ccc;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+      .topnav .header-right {
+        float: none;
       }
   }

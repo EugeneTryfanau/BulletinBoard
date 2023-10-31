@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ProductsComponent } from '../products/products.component';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,7 +14,9 @@ export class NavBarComponent {
   userName: any;
   userRole: any;
 
-  constructor(private auth: AuthService) {
+  searchLine: string = "";
+
+  constructor(private auth: AuthService, private prod: ProductService) {
 
   }
 
@@ -47,5 +51,4 @@ export class NavBarComponent {
       }
     }
   }
-
 }
