@@ -54,7 +54,7 @@
         <a routerLink="/products/product/{{product.id}}">{{product.name}}</a>
         <p class="description">{{product.description}}</p>
         <p>{{product.price}}</p>
-        <p><button class="btn-change">Изменить</button><button class="btn-delete" (click)="deleteUserProductById(product.id)">Удалить</button></p>
+        <p><button class="btn-change" routerLink="/products/product/edit/{{product.id}}" >Изменить</button><button class="btn-delete" (click)="deleteUserProductById(product.id)">Удалить</button></p>
       </div>
     </div>
   </div>

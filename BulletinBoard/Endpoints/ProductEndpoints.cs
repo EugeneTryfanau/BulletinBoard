@@ -1,6 +1,8 @@
 ﻿using BulletinBoard.DAL.Data;
 using BulletinBoard.DAL.Entity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BulletinBoard.Endpoints
 {
@@ -22,7 +24,6 @@ namespace BulletinBoard.Endpoints
                                 .OrderByDescending(x => x.Id).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
                 return result;
             }
-
         }
 
         public static async Task<int> GetProductsPageCount(ApplicationDbContext db, int category = 0, int pagesize = 8, string searchString = "%")
@@ -65,7 +66,7 @@ namespace BulletinBoard.Endpoints
 
         public static async Task<Product?> GetProductById(ApplicationDbContext db, int productId)
         {
-            var product = await db.Products.Include(x => x.Pictures).SingleOrDefaultAsync(x => x.Id == productId);
+            var product = await db.Products.Include(x => x.Pictures).Include(x => x.Category).SingleOrDefaultAsync(x => x.Id == productId);
 
             return product;
         }
@@ -109,6 +110,30 @@ namespace BulletinBoard.Endpoints
             var usersProducts = await db.Products.Include(x => x.Pictures)
                 .Where(x => x.UserId == userId).OrderByDescending(x => x.Id).ToListAsync();
             return usersProducts;
+        }
+
+        public static async Task<IResult> ChangeProductInfo(ApplicationDbContext db, ProductInfo productInfo)
+        {
+            if (productInfo == null || productInfo.Id == 0)
+            {
+                return Results.BadRequest(new { message = "Нет информации об объявлении." });
+            }
+
+            var productToChange = await db.Products.FirstOrDefaultAsync(x => x.Id == productInfo.Id);
+            var category = await db.Categories.FirstOrDefaultAsync(x => x.Id == productInfo.CategoryId); 
+            if (productToChange != null && category != null)
+            {
+                productToChange.Name = productInfo.Name != null && productInfo.Name != "" ? productInfo.Name : productToChange.Name;
+                productToChange.Price = productInfo.Price > 0 ? productInfo.Price : productToChange.Price;
+                productToChange.Category = productInfo.CategoryId != category.Id ? category : productToChange.Category;
+                productToChange.Description = productInfo.Description != null && productInfo.Description != "" ? productInfo.Description : productToChange.Description;
+                productToChange.ConditionIsNew = productInfo.ConditionIsNew;
+
+                await db.SaveChangesAsync();
+
+                return Results.Ok();
+            }
+            return Results.BadRequest(new { message = "Нет информации об объявлении или категории товара." });
         }
 
         public static async Task<IResult> DeleteProductById(ApplicationDbContext db, int productId)

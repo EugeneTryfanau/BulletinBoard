@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   async changeUserInfo(userInfoModel: ApplicationUserInfo) {
-    return await this.http.patch("/api/users/change-user-info", userInfoModel);
+    return await this.http.patch("/api/users", userInfoModel);
   }
 
   login(loginForm: any) {

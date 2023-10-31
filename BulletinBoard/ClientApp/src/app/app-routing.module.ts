@@ -8,6 +8,7 @@ import { CreateproductComponent } from './products/createproduct/createproduct.c
 import { ProductsComponent } from './products/products.component';
 import { ProductComponent } from './products/product/product.component';
 import { UserComponent } from './users/user/user.component';
+import { EditproductComponent } from './products/editproduct/editproduct.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: "categories", component: CategoriesComponent },
   { path: "", component: ProductsComponent },
   { path: "products/product/:productId", component: ProductComponent },
+  { path: "products/product/edit/:productId", component: EditproductComponent },
   { path: "create-product", component: CreateproductComponent },
   { path: "user-profile", component: UserComponent }
 ];

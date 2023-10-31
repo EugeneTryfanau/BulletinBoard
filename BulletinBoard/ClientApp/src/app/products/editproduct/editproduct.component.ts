@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { firstValueFrom, switchMap } from 'rxjs';
+import { ProductInfo } from '../../services/models/productinfo';
+import { CategoryService } from '../../services/category.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-editproduct',
@@ -14,15 +17,18 @@ export class EditproductComponent {
   product: any;
   pictures: any;
   picIndexes: number[] = [];
+  categories: any = [];
 
   slideIndex: number = 1;
   slideChanged: boolean = false;
 
-  constructor(private route: ActivatedRoute, private prod: ProductService) {
+  productInfo: ProductInfo = new ProductInfo();
+
+  constructor(private http: HttpClient, private route: ActivatedRoute, private prod: ProductService, private categoryService: CategoryService) {
   }
 
   async ngOnInit() {
-
+    this.categories = await firstValueFrom(this.http.get<any>("/api/categories"));
     await this.route.paramMap.pipe(
       switchMap(params => params.getAll('productId')))
       .subscribe(data => this.productId = +data);
@@ -32,6 +38,7 @@ export class EditproductComponent {
     for (let i = 0; i < this.pictures.length; i++) {
       this.picIndexes.push(i + 1);
     }
+    console.log(this.product);
   }
 
   plusSlides(n: number) {
@@ -60,5 +67,23 @@ export class EditproductComponent {
     slides[this.slideIndex - 1].style.display = "block";
     dots[this.slideIndex - 1].className += " active";
     this.slideChanged = true;
+  }
+
+  async sendChangedInfo() {
+    this.productInfo.id = this.product.id;
+    this.productInfo.categoryId = this.product.categoryId;
+    this.productInfo.name = this.product.name;
+    this.productInfo.price = this.product.price;
+    this.productInfo.description = this.product.description;
+    this.productInfo.conditionIsNew = this.product.conditionIsNew == "false" ? false : true;
+    (await this.prod.changeProductInfo(this.productInfo))
+      .subscribe(
+        res => {
+          window.location.href = "/user-profile";
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { ProductInfo } from './models/productinfo';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +48,10 @@ export class ProductService {
     return this.products;
   }
 
+  async changeProductInfo(productInfoModel: ProductInfo) {
+    return await this.http.patch("/api/products", productInfoModel);
+  }
+
   getCurrentPage() {
     return this.currentPage;
   }
@@ -56,7 +61,7 @@ export class ProductService {
   }
 
   async getUsersProducts(userId: string) {
-    return await firstValueFrom(this.http.get<any>("/api/users/products/" + userId));
+    return await firstValueFrom(this.http.get<any>("/api/products/users/" + userId));
   }
 
   async deleteUserProductById(productId: number) {

@@ -53,8 +53,7 @@ var apiEndpoints = app.MapGroup("/api");
 //TODO change pathes to unificate them
 apiEndpoints.MapGet("/users", UserEndpoints.Handler);
 apiEndpoints.MapGet("/users/{userId}", UserEndpoints.GetUserDetails).RequireAuthorization();
-apiEndpoints.MapGet("/users/products/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
-apiEndpoints.MapPatch("/users/change-user-info", UserEndpoints.ChangeUserInfo).RequireAuthorization();
+apiEndpoints.MapPatch("/users", UserEndpoints.ChangeUserInfo).RequireAuthorization();
 apiEndpoints.MapPut("/users/change-password", UserEndpoints.ChangePassword).RequireAuthorization();
 apiEndpoints.MapDelete("/users/{userId}", UserEndpoints.DeleteAccount).RequireAuthorization();
 
@@ -72,8 +71,10 @@ apiEndpoints.MapGet("/categories", CategoryEndpoints.CategoryList);
 
 //products
 apiEndpoints.MapGet("/products/{productId}", ProductEndpoints.GetProductById);
+apiEndpoints.MapGet("/products/users/{userId}", ProductEndpoints.GetUsersProducts).RequireAuthorization();
 apiEndpoints.MapGet("/products/last/{userId}", ProductEndpoints.GetLastCreatedProductByUserId).RequireAuthorization();
 apiEndpoints.MapPost("/products", ProductEndpoints.CreateProduct).RequireAuthorization();
+apiEndpoints.MapPatch("/products", ProductEndpoints.ChangeProductInfo).RequireAuthorization();
 apiEndpoints.MapDelete("/products/{productId}", ProductEndpoints.DeleteProductById).RequireAuthorization();
 
 //products filter

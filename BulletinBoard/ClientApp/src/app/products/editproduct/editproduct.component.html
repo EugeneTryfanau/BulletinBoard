@@ -1,1 +1,66 @@
-<p>editproduct works!</p>
+<div class="product-info-conteiner">
+  <h2 class="col">Редарктирование объявления: {{product?.name}}</h2>
+
+  <div class="slideshow-container">
+
+    <div>
+      <img src="{{product?.pictures[0].publicId}}" class="myFirstSlides fade" *ngIf="!slideChanged" style="width: 100%; height: 500px">
+      <img *ngFor="let pic of pictures" src="{{pic.publicId}}" class="mySlides fade" style="width: 100%; height: 500px">
+    </div>
+
+
+    <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+    <a class="next" (click)="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
+
+  <div style="text-align:center">
+    <span class="dot" *ngFor="let index of picIndexes" (click)="currentSlide(index)"></span>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item">
+      <strong>Дата создания объявления: </strong>{{product?.creationDate}}
+    </li>
+    <li class="list-group-item">
+      <strong>Наименование объявления: </strong>
+      <input type="text" [(ngModel)]="product.name" step="0.01" min="0" name="productname" id="productname" required>
+    </li>
+    <li class="list-group-item">
+      <strong>Стоимость: </strong>
+      <input type="number" [(ngModel)]="product.price" step="0.01" min="0" name="productprice" id="productprice" required> руб.
+    </li>
+    <li class="list-group-item">
+      <strong>Категория:</strong>
+      <select class="dropdown" [(ngModel)]="product.categoryId" name="selectcat">
+        <option class="dropdown-opt" *ngFor="let cat of categories"
+                [attr.selected]="cat.categoryName==product.category.categoryName ? true : null" [value]="cat.id">
+          {{cat.categoryName}}
+        </option>
+      </select>
+    </li>
+    <li class="list-group-item">
+      <strong>Описание: </strong>
+      <textarea [(ngModel)]="product.description" type="text" name="description" id="description"
+                placeholder="Введите описание товара" required
+                rows="5" cols="78">{{product?.description}}</textarea>
+    </li>
+    <li class="list-group-item">
+      <strong>Состояние товара:</strong>
+      <select class="dropdown" [(ngModel)]="product.conditionIsNew" name="selectcond">
+        <option class="dropdown-opt" [attr.selected]="product.conditionIsNew == true ? true : null" [value]="true">
+          Новый
+        </option>
+        <option class="dropdown-opt" [attr.selected]="product.conditionIsNew == false ? true : null" [value]="false">
+          Б/У
+        </option>
+      </select>
+    </li>
+    <li class="list-group-item">
+      <br />
+      <span><i class="fas fa-exclamation-circle"></i></span>
+      <span> Администрация сайта не несет ответственности за предлагаемый товар.</span>
+    </li>
+  </ul>
+  <a class="btn-change-info" (click)="sendChangedInfo()">Сохранить изменения</a>
+</div>
