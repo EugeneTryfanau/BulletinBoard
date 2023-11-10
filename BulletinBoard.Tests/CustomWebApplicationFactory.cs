@@ -38,7 +38,7 @@ namespace BulletinBoard.Tests
                     options.UseSqlServer(connection);
                 });
             });
-
+            
             builder.UseEnvironment("Development");
         }
     }

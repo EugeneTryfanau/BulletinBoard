@@ -85,3 +85,5 @@ apiEndpoints.MapGet("/products/pages/{searchString}/{category}/{pagesize}/{page}
 apiEndpoints.MapPost("/pictures/{productId}", PictureEndpoints.UploadPicture).RequireAuthorization();
 
 app.Run();
+
+public partial class Program { }
